@@ -9,11 +9,26 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="/admin/chu-de" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Widgets
-                            <span class="right badge badge-danger">New</span>
+                            Chủ Đề
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/de-muc" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Đề Mục
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/chuong" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Chương
                         </p>
                     </a>
                 </li>
