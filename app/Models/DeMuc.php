@@ -15,6 +15,7 @@ class DeMuc extends Model
         'ten_de_muc',
         'so_thu_tu',
         'id_chu_de',
+        'hash_chu_de',
         'is_open',
     ];
 }

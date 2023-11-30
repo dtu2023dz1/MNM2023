@@ -17,5 +17,7 @@ class Chuong extends Model
         'id_chu_de',
         'is_open',
         'MAPC',
+        'hash_chu_de',
+        'hash_de_muc'
     ];
 }
