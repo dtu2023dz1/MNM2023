@@ -20,24 +20,6 @@ Route::get('/', function () {
     return view('admin.share.master');
 });
 
-
-Route::group(['prefix'  =>  '/admin'], function() {
-    Route::group(['prefix'  =>  '/chu-de'], function() {
-        Route::get('/', [ChuDeController::class, 'viewChuDe']);
-        Route::get('/data', [ChuDeController::class, 'getData']);
-        Route::post('/doi-trang-thai', [ChuDeController::class, 'doiTrangThai']);
-        Route::post('/update', [ChuDeController::class, 'updateChuDe']);
-    });
-    Route::group(['prefix'  =>  '/de-muc'], function() {
-        Route::get('/', [DeMucController::class, 'viewDeMuc']);
-        Route::get('/data', [DeMucController::class, 'getData']);
-        Route::post('/doi-trang-thai', [DeMucController::class, 'doiTrangThai']);
-        Route::post('/update', [DeMucController::class, 'updateDeMuc']);
-    });
-    Route::group(['prefix'  =>  '/chuong'], function() {
-        Route::get('/', [ChuongController::class, 'viewChuong']);
-        Route::get('/data', [ChuongController::class, 'getData']);
-        Route::post('/doi-trang-thai', [ChuongController::class, 'doiTrangThai']);
-        Route::post('/update', [ChuongController::class, 'updateChuong']);
-    });
-});
+Route::get('/chu-de', [ChuDeController::class, 'viewChuDe']);
+Route::get('/de-muc', [DeMucController::class, 'viewDeMuc']);
+Route::get('/chuong', [ChuongController::class, 'viewChuong']);
