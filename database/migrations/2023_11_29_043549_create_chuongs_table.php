@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('so_thu_tu');
             $table->integer('id_de_muc');
             $table->integer('id_chu_de');
+            $table->string('hash_chu_de')->nullable();
+            $table->string('hash_de_muc')->nullable();
             $table->integer('is_open')->default(1);
             $table->string('MAPC')->nullable();
             $table->timestamps();

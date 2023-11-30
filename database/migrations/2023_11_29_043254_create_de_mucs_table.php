@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('ten_de_muc');
             $table->integer('so_thu_tu');
             $table->integer('id_chu_de');
+            $table->string('hash_chu_de')->nullable();
             $table->integer('is_open')->default(1);
             $table->timestamps();
         });
