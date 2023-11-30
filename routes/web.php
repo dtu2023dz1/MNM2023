@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.share.master');
 });
+
 Route::get('/chu-de', [ChuDeController::class, 'viewChuDe']);
 Route::get('/de-muc', [DeMucController::class, 'viewDeMuc']);
 Route::get('/chuong', [ChuongController::class, 'viewChuong']);
