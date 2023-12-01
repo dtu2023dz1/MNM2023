@@ -17,10 +17,22 @@ class ChuongController extends Controller
         $data = Chuong::join('de_mucs', 'de_mucs.id', 'chuongs.id_de_muc')
                       ->join('chu_des', 'chu_des.id', 'chuongs.id_de_muc')
                       ->select('chuongs.*', 'chu_des.ten_chu_de', 'de_mucs.ten_de_muc')
-                      ->get();
+                      ->paginate(env('PAGINATE_ADMIN'));
+
+        $response = [
+            'pagination' => [
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+                'from' => $data->firstItem(),
+                'to' => $data->lastItem()
+            ],
+            'data' => $data,
+        ];
 
         return response()->json([
-            'data'    => $data,
+            'data'    => $response,
         ]);
     }
 
