@@ -13,10 +13,22 @@ class ChuDeController extends Controller
 
     public function getData()
     {
-        $data = ChuDe::all();
+        $data = ChuDe::paginate(env('PAGINATE_ADMIN'));
+
+        $response = [
+            'pagination' => [
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+                'from' => $data->firstItem(),
+                'to' => $data->lastItem()
+            ],
+            'data' => $data,
+        ];
 
         return response()->json([
-            'data'    => $data,
+            'data'    => $response,
         ]);
     }
 

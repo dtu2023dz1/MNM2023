@@ -15,10 +15,22 @@ class DeMucController extends Controller
     {
         $data = DeMuc::join('chu_des', 'chu_des.id', 'de_mucs.id_chu_de')
                      ->select('de_mucs.*', 'chu_des.ten_chu_de')
-                     ->get();
+                     ->paginate(env('PAGINATE_ADMIN'));
+
+        $response = [
+            'pagination' => [
+                'total' => $data->total(),
+                'per_page' => $data->perPage(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+                'from' => $data->firstItem(),
+                'to' => $data->lastItem()
+            ],
+            'data' => $data,
+        ];
 
         return response()->json([
-            'data'    => $data,
+            'data'    => $response,
         ]);
     }
 
