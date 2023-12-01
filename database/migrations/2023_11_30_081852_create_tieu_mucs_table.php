@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tieu_mucs', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_tieu_muc');
+            $table->longText('ten_tieu_muc');
             $table->string('MAPC')->nullable();
             $table->integer('id_chuong');
             $table->integer('id_de_muc');
@@ -21,6 +21,11 @@ return new class extends Migration
             $table->string('hash_chu_de')->nullable();
             $table->string('hash_de_muc')->nullable();
             $table->string('hash_chuong')->nullable();
+            $table->longText('ghi_chu')->nullable();
+            $table->longText('link_ghi_chu')->nullable();
+            $table->longText('noi_dung')->nullable();
+            $table->longText('chi_dan')->nullable();
+            $table->longText('link_chi_dan')->nullable();
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@
 <!-- AdminLTE App -->
 <script src="/assets/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/assets/dist/js/demo.js"></script>
+{{-- <script src="/assets/dist/js/demo.js"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/assets/dist/js/pages/dashboard.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
