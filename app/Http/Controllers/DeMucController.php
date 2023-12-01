@@ -4,11 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\DeMuc;
 use Illuminate\Http\Request;
+use Illuminate\Support\Js;
 
 class DeMucController extends Controller
 {
     public function viewDeMuc(){
         return view('admin.page.DeMuc.index');
+    }
+
+    public function getDataAPI()
+    {
+        $data = DeMuc::all();
+
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     public function getData()

@@ -156,7 +156,7 @@ async function asyncTaskFunction(element) {
 
 async function getDataPL() {
     try {
-        const list_de_muc = await axios.get(LINK_GET + '/get-data-de-muc');
+        const list_de_muc = await axios.get(LINK_GET + '/get-data-de-muc-api');
         const taskQueue = async.queue(asyncTaskFunction, 1);
         await list_de_muc.data.data.forEach(async element =>  {
             setTimeout(() => {

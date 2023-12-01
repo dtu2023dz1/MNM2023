@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutoController;
 use App\Http\Controllers\DeMucController;
 use App\Http\Controllers\TieuMucController;
 use App\Models\TieuMuc;
@@ -22,5 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/create-data-tieu-muc', [TieuMucController::class, 'storeApi']);
-Route::get('/get-data-de-muc', [DeMucController::class, 'getData']);
+Route::get('/get-data-de-muc-api', [DeMucController::class, 'getDataAPI']);
 Route::post('/create-tieu-muc', [TieuMucController::class, 'store']);
+Route::get('/data-excel', [AutoController::class, 'dataExcel']);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutoController;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\ChuongController;
 use App\Http\Controllers\DeMucController;
@@ -20,6 +21,7 @@ Route::get('/', function () {
     return view('admin.share.master');
 });
 
+Route::get('/data-excel', [AutoController::class, 'dataExcel']);
 Route::group(['prefix'  =>  '/admin'], function() {
     Route::group(['prefix'  =>  '/chu-de'], function() {
         Route::get('/', [ChuDeController::class, 'viewChuDe']);
