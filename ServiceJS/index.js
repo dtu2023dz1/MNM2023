@@ -128,7 +128,7 @@ async function getDataDetail(element) {
                             });
                             res_data.chi_dan = textContent;
                         } else {
-                            res_data.noi_dung = res_data.noi_dung + textContent + "\n";
+                            res_data.noi_dung = res_data.noi_dung + textContent + ". ";
                         }
                     }
                     value.data = list;

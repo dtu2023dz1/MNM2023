@@ -22,10 +22,11 @@ class AutoController extends Controller
                             DB::raw('CONCAT("Ghi chú ",tieu_mucs.ghi_chu ," (link: ", tieu_mucs.link_ghi_chu, ")") as ghi_chu_content'),
                             DB::raw('CONCAT("Chỉ dẫn ",tieu_mucs.chi_dan ," (", tieu_mucs.link_chi_dan, ")") as chi_dan_content'),
                        )
+                       ->whereRaw('CHAR_LENGTH(tieu_mucs.noi_dung) <= 3000')
                        ->get();
         foreach ($data as $key => $value) {
             $content = "";
-            $number = $key + 1;
+            $number = $key + 2;
             $content = $content . $value->chu_de_content . $value->de_muc_content . $value->chuong_content . $value->content . $value->ghi_chu_content . $value->chi_dan_content;
             echo $formattedNumber = str_pad($number, 9, '0', STR_PAD_LEFT) . " | " . $content . "<br>";
         }

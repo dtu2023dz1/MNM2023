@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AutoController;
+use App\Http\Controllers\ChatConTroller;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\ChuongController;
 use App\Http\Controllers\DeMucController;
@@ -41,4 +42,8 @@ Route::group(['prefix'  =>  '/admin'], function() {
         Route::post('/doi-trang-thai', [ChuongController::class, 'doiTrangThai']);
         Route::post('/update', [ChuongController::class, 'updateChuong']);
     });
+});
+
+Route::group([''], function() {
+    Route::get('/chat', [ChatConTroller::class, 'index']);
 });
