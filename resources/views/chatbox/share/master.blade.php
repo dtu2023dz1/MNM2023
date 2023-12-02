@@ -96,9 +96,14 @@
                 message: 'Xin chào, tôi có thể giúp gì không?'
             }, ],
             message: '',
+            gender: 'Vietnamese Male',
             lang_: "vi-VI",
             runtimeTranscription_: "",
             transcription_: [],
+            header : {
+                "Content-Type" : "application/json",
+                "token" : "SxYgrllPv9Avk4Y-xbptJkGU4Bu1knlEvyyOnI5AqytpkBJFICFsDLodP-kTZCdd"
+            }
         },
         created() {
 
@@ -133,13 +138,28 @@
                 recognition.start();
             },
             speak(text) {
-                var lang = 'vi-VN'
-                var msg = new SpeechSynthesisUtterance();
-                // var voices  = window.speechSynthesis.getVoices();
-                // msg.voice   = voices.filter(voice => voice.lang == lang)[0];
-                msg.text    = text;
-                msg.lang    = lang;
-                window.speechSynthesis.speak(msg);
+                var payload = {
+                    "text": text,
+                    "voice": "trinhthiviettrinh",
+                    "id": "2",
+                    "without_filter": false,
+                    "speed": 1.0,
+                    "tts_return_option": 2
+                }
+                axios
+                    .post('https://viettelgroup.ai/voice/api/tts/v1/rest/syn', payload, {
+                        headers : this.header,
+                        responseType: 'arraybuffer'
+                    })
+                    .then((res) => {
+                        var blob = new Blob([res.data], { type: 'audio/wav' });
+                        var audioUrl = URL.createObjectURL(blob);
+                        var audio = new Audio(audioUrl);
+                        audio.play();
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching TTS data:', error);
+                    });
             },
 
             sendRequest(text) {
