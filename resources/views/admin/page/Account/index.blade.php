@@ -67,8 +67,14 @@
                                     <button v-else class="btn btn-danger">Tạm Tắt</button>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <div class="btn-group">
+                                        <button type="button" v-on:click="account_update = Object.assign({}, value)" class="btn btn-success" data-toggle="dropdown" ><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <div class="dropdown-menu" role="menu">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#capNhatTaiKhoan" >Cập Nhật</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#capNhatMatKhau">Đổi Mật Khẩu</a>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger" v-on:click="account_delete = Object.assign({}, value)" data-toggle="modal" data-target="#xoaModal"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -92,6 +98,85 @@
                         </li>
                     </ul>
                 </nav>
+
+                {{-- Modal --}}
+                <div class="modal fade" id="capNhatTaiKhoan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Cập Nhật Tài Khoản</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mb-3">
+                                <label class="mb-2" for="">Họ Và Tên</label>
+                                <input type="text" class="form-control" placeholder="Nhập Họ Và Tên" v-model="account_update.full_name">
+                            </div>
+                            <div class="row mb-3">
+                                <label class="mb-2" for="">Email</label>
+                                <input type="text" class="form-control" placeholder="Nhập Email" v-model="account_update.email">
+                            </div>
+                            <div class="row mb-3">
+                                <label class="mb-2" for="">Số Điện Thoại</label>
+                                <input type="tel" class="form-control" placeholder="Nhập Số điện thoại" v-model="account_update.so_dien_thoai">
+                            </div>
+                            <div class="row mb-3">
+                                <label class="mb-2" for="">Username</label>
+                                <input type="text" class="form-control" placeholder="Nhập Username" v-model="account_update.username">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                          <button type="button" class="btn btn-primary" v-on:click="update()">Lưu</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="capNhatMatKhau" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Cập Nhật Mật Khẩu</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mb-3">
+                                <label class="mb-2" for="">Nhập Mật Khẩu Mới</label>
+                                <input type="text" class="form-control" id="password" placeholder="Nhập mật khẩu mới">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                          <button type="button" class="btn btn-primary" v-on:click="updatePassword()">Lưu</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="xoaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Cập Nhật Mật Khẩu</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger" role="alert">
+                                Bạn có chắc chắn muốn xóa tài khoản không!
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                          <button type="button" class="btn btn-danger" v-on:click="destroy()">Xác Nhận</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -112,7 +197,9 @@
             check       : true,
             offset: 4,
             account         : {},
-            list            : []
+            list            : [],
+            account_update  : {},
+            account_delete  : {}
         },
         created() {
             this.loadData(this.pagination.current_page);
@@ -125,6 +212,7 @@
                         if(res.data.status) {
                             toastr.success(res.data.message);
                             this.account = {};
+                            this.loadData(this.pagination.current_page)
                         } else {
                             toastr.error(res.data.message);
                         }
@@ -149,6 +237,63 @@
                 if(this.check) {
                     this.loadData(page);
                 }
+            },
+
+            update() {
+                axios
+                    .post('/admin/account/update', this.account_update)
+                    .then((res) => {
+                        if(res.data.status) {
+                            toastr.success(res.data.message);
+                            $("#capNhatTaiKhoan").modal("hide");
+                            this.loadData(this.pagination.current_page)
+                        } else {
+                            toastr.error(res.data.message);
+                        }
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            toastr.error(v[0], 'Error');
+                        });
+                    });
+            },
+
+            updatePassword() {
+                this.account_update.password = $("#password").val();
+                axios
+                    .post('/admin/account/update-password', this.account_update)
+                    .then((res) => {
+                        if(res.data.status) {
+                            toastr.success(res.data.message);
+                            $("#capNhatMatKhau").modal("hide");
+                        } else {
+                            toastr.error(res.data.message);
+                        }
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            toastr.error(v[0], 'Error');
+                        });
+                    });
+            },
+
+            destroy() {
+                axios
+                    .post('/admin/account/delete', this.account_delete)
+                    .then((res) => {
+                        if(res.data.status) {
+                            toastr.success(res.data.message);
+                            $("#xoaModal").modal("hide");
+                            this.loadData(this.pagination.current_page)
+                        } else {
+                            toastr.error(res.data.message);
+                        }
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            toastr.error(v[0], 'Error');
+                        });
+                    });
             },
         },
 
