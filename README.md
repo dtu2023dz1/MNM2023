@@ -7,33 +7,33 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Giới thiệu về Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Laravel là một khung ứng dụng web với cú pháp tinh tế, biểu cảm. Chúng tôi tin rằng sự phát triển phải là một trải nghiệm thú vị và sáng tạo để thực sự thỏa mãn. Laravel loại bỏ những khó khăn trong quá trình phát triển bằng cách giảm bớt các tác vụ phổ biến được sử dụng trong nhiều dự án web, chẳng hạn như:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Công cụ định tuyến đơn giản, nhanh chóng](https://laravel.com/docs/routing).
+- [Thùng chứa phụ thuộc mạnh mẽ](https://laravel.com/docs/container).
+- Nhiều back-end để [lưu trữ phiên](https://laravel.com/docs/session) và [bộ đệm.](https://laravel.com/docs/cache)
+- [Cơ sở dữ liệu ORM ](https://laravel.com/docs/eloquent) biểu đạt, trực quan.
+- [Di chuyển lược đồ](https://laravel.com/docs/migrations) bất khả tri của cơ sở dữ liệu.
+- [Xử lý công việc nền mạnh mẽ.](https://laravel.com/docs/queues).
+- [Phát sóng sự kiện theo thời gian thực.](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Laravel có thể truy cập, mạnh mẽ và cung cấp các công cụ cần thiết cho các ứng dụng lớn, mạnh mẽ.
 
-## Learning Laravel
+## Học Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Laravel có thư viện [tài liệu](https://laravel.com/docs) và video hướng dẫn rộng rãi và kỹ lưỡng nhất trong tất cả các khung ứng dụng web hiện đại, giúp bạn dễ dàng bắt đầu với khung này.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Bạn cũng có thể dùng thử [Laravel Bootcamp](https://bootcamp.laravel.com), nơi bạn sẽ được hướng dẫn xây dựng một ứng dụng Laravel hiện đại từ đầu.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Nếu bạn không muốn đọc, [Laracasts](https://laracasts.com) có thể giúp đỡ. Laracasts chứa hơn 2000 video hướng dẫn về nhiều chủ đề bao gồm Laravel, PHP hiện đại, thử nghiệm đơn vị và JavaScript. Nâng cao kỹ năng của bạn bằng cách tìm hiểu thư viện video toàn diện của chúng tôi.
 
-## Laravel Sponsors
+## Nhà tài trợ Laravel
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+### Đối tác cao cấp
 
 - **[Vehikl](https://vehikl.com/)**
 - **[Tighten Co.](https://tighten.co)**
@@ -49,18 +49,40 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[byte5](https://byte5.de)**
 - **[OP.GG](https://op.gg)**
 
-## Contributing
+## Chạy dự án
+1. Yêu cầu cài đặt môi trường [XAMPP](https://www.apachefriends.org/download.html) 8.1 trở lên.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. Yêu cầu cài đặt môi trường [nodejs](https://nodejs.org/en) 
+3. Chạy lệnh tại CMD
 
-## Code of Conduct
+        composer install
+	    npm install   
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4.  Thay đổi file .env
 
-## Security Vulnerabilities
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE={yourname_database}
+        DB_USERNAME=root
+        DB_PASSWORD=
+5.  Chạy lệnh sau để tạo bảng dữ liệu
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+        php artisan migrate
 
-## License
+6.  Chạy lệnh sau để import dữ liệu đang có sẵn
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+        php artisan db:seed
+
+7.  Chạy lệnh sau để bật serve local
+
+        php artisan serve
+
+
+
+
+## Giấy phép
+
+Laravel framework là phần mềm nguồn mở được cấp phép theo giấy phép [MIT license](https://opensource.org/licenses/MIT).
+
+Giấy phép từ [ThemeWagon](https://themewagon.com/license/) giao diện nguồn mở được sử dụng để phát triển dự án
