@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatConTroller;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\ChuongController;
 use App\Http\Controllers\DeMucController;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +24,11 @@ Route::get('/', function () {
     return view('admin.share.master');
 });
 
+Route::get('/admin/login', [AdminController::class, 'viewLogin']);
+Route::post('/admin/login', [AdminController::class, 'login']);
+
 Route::get('/data-excel', [AutoController::class, 'dataExcel']);
-Route::group(['prefix'  =>  '/admin'], function() {
+Route::group(['prefix'  =>  '/admin', "middleware" => "adminMiddleWare"], function() {
     Route::group(['prefix'  =>  '/chu-de'], function() {
         Route::get('/', [ChuDeController::class, 'viewChuDe']);
         Route::get('/data', [ChuDeController::class, 'getData']);
@@ -49,6 +53,9 @@ Route::group(['prefix'  =>  '/admin'], function() {
         Route::get('/data', [AdminController::class, 'getData']);
 
         Route::post('/create', [AdminController::class, 'store']);
+        Route::post('/update', [AdminController::class, 'update']);
+        Route::post('/update-password', [AdminController::class, 'updatePasword']);
+        Route::post('/delete', [AdminController::class, 'destroy']);
     });
 });
 
