@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AutoController;
 use App\Http\Controllers\ChatConTroller;
 use App\Http\Controllers\ChuDeController;
@@ -41,6 +42,13 @@ Route::group(['prefix'  =>  '/admin'], function() {
         Route::get('/data', [ChuongController::class, 'getData']);
         Route::post('/doi-trang-thai', [ChuongController::class, 'doiTrangThai']);
         Route::post('/update', [ChuongController::class, 'updateChuong']);
+    });
+
+    Route::group(['prefix'  =>  '/account'], function() {
+        Route::get('/', [AdminController::class, 'index']);
+        Route::get('/data', [AdminController::class, 'getData']);
+
+        Route::post('/create', [AdminController::class, 'store']);
     });
 });
 
