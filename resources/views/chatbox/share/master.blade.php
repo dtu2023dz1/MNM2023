@@ -18,12 +18,14 @@
         integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="/chatbox/chat.css">
+    <link rel="stylesheet" href="/card_slide/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
     <div class="container-fluid h-100" id="app">
-        <div class="row justify-content-center h-100">
+        <div class="row justify-content-center h-75">
             <div class="col-md-8 col-xl-6 chat">
                 <div class="card">
                     <div class="card-header msg_head">
@@ -82,10 +84,97 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center">
+            <div class="col-md- col-xl-6">
+                <div class="card__content swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="card__article">
+                                <div class="card__data">
+                                    <h3 class="card__name">Kell Dawx 1</h3>
+                                    <p class="card__description">
+                                        Passionate about development and design,
+                                        I carry out projects at the request of users.
+                                    </p>
+
+                                    <a href="#" class="card__button">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card__article">
+                                <div class="card__data">
+                                    <h3 class="card__name">Kell Dawx 2</h3>
+                                    <p class="card__description">
+                                        Passionate about development and design,
+                                        I carry out projects at the request of users.
+                                    </p>
+                                    <a href="#" class="card__button">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card__article">
+                                <div class="card__data">
+                                    <h3 class="card__name">Kell Dawx</h3>
+                                    <p class="card__description">
+                                        Passionate about development and design,
+                                        I carry out projects at the request of users.
+                                    </p>
+                                    <a href="#" class="card__button">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card__article">
+                                <div class="card__data">
+                                    <h3 class="card__name">Kell Dawx 3</h3>
+                                    <p class="card__description">
+                                        Passionate about development and design,
+                                        I carry out projects at the request of users.
+                                    </p>
+                                    <a href="#" class="card__button">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card__article">
+                                <div class="card__data">
+                                    <h3 class="card__name">Kell Dawx 4</h3>
+                                    <p class="card__description">
+                                        Passionate about development and design,
+                                        I carry out projects at the request of users.
+                                    </p>
+                                    <a href="#" class="card__button">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card__article">
+                                <div class="card__data">
+                                    <h3 class="card__name">Kell Dawx 5</h3>
+                                    <p class="card__description">
+                                        Passionate about development and design,
+                                        I carry out projects at the request of users.
+                                    </p>
+                                    <a href="#" class="card__button">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/card_slide/scripts.js"></script>
 <script>
     new Vue({
         el: '#app',
@@ -100,9 +189,9 @@
             lang_: "vi-VI",
             runtimeTranscription_: "",
             transcription_: [],
-            header : {
-                "Content-Type" : "application/json",
-                "token" : "SxYgrllPv9Avk4Y-xbptJkGU4Bu1knlEvyyOnI5AqytpkBJFICFsDLodP-kTZCdd"
+            header: {
+                "Content-Type": "application/json",
+                "token": "SxYgrllPv9Avk4Y-xbptJkGU4Bu1knlEvyyOnI5AqytpkBJFICFsDLodP-kTZCdd"
             }
         },
         created() {
@@ -148,11 +237,13 @@
                 }
                 axios
                     .post('https://viettelgroup.ai/voice/api/tts/v1/rest/syn', payload, {
-                        headers : this.header,
+                        headers: this.header,
                         responseType: 'arraybuffer'
                     })
                     .then((res) => {
-                        var blob = new Blob([res.data], { type: 'audio/wav' });
+                        var blob = new Blob([res.data], {
+                            type: 'audio/wav'
+                        });
                         var audioUrl = URL.createObjectURL(blob);
                         var audio = new Audio(audioUrl);
                         audio.play();
