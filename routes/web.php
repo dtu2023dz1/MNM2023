@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatConTroller;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\ChuongController;
 use App\Http\Controllers\DeMucController;
+use App\Http\Controllers\HomePageController;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +20,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('admin.share.master');
-});
 
 Route::get('/admin/login', [AdminController::class, 'viewLogin']);
 Route::post('/admin/login', [AdminController::class, 'login']);
@@ -60,5 +57,6 @@ Route::group(['prefix'  =>  '/admin', "middleware" => "adminMiddleWare"], functi
 });
 
 Route::group([''], function() {
+    Route::get('/', [HomePageController::class, 'index']);
     Route::get('/chat', [ChatConTroller::class, 'index']);
 });
