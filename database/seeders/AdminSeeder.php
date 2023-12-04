@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class AdminSeeder extends Seeder
                 'email'             => "admin@master.com",
                 'so_dien_thoai'     => "0123456789",
                 'is_master'         => 1,
+                'token'             => Str::uuid(),
             ]
         ]);
     }

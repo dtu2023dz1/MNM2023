@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Account\CreateTaiKhoanRequest;
+use App\Http\Requests\Account\DetailTaiKhoanRequest;
 use App\Http\Requests\Account\UpdateMatKhauRequest;
 use App\Http\Requests\Account\UpdateTaiKhoanRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -20,6 +22,7 @@ class AdminController extends Controller
     {
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
+        $data['token']    = Str::uuid();
         Admin::create($data);
         return response()->json([
             'status'    => true,
@@ -30,7 +33,6 @@ class AdminController extends Controller
     public function getData()
     {
         $data = Admin::paginate(env('PAGINATE_ADMIN'));
-
         $response = [
             'pagination' => [
                 'total' => $data->total(),
@@ -76,7 +78,26 @@ class AdminController extends Controller
         ]);
     }
 
-    public function destroy(Request $request)
+    public function changeStatus(DetailTaiKhoanRequest $request)
+    {
+        $login = Auth::guard('admin')->user();
+        $user = Admin::find($request->id);
+        if($user->id == $login->id) {
+            return response()->json([
+                'status'    => false,
+                'message'   => "Bạn không thể đổi trạng của chính bạn!"
+            ]);
+        }
+        $user->is_open = !$user->is_open;
+        $user->save();
+
+        return response()->json([
+            'status'    => true,
+            'message'   => "Đổi trạng thái thành công!"
+        ]);
+    }
+
+    public function destroy(DetailTaiKhoanRequest $request)
     {
         $account = Admin::find($request->id);
         if($account) {
@@ -135,5 +156,60 @@ class AdminController extends Controller
                 'message' => "Thông tin đăng nhập không chính xác!"
             ]);
         }
+    }
+
+    public function homePage()
+    {
+        return view('admin.page.Home.index');
+    }
+
+    public function getToken()
+    {
+        $user = Auth::guard('admin')->user();
+        if($user) {
+            return response()->json([
+                'status'    => true,
+                'user'     => $user
+            ]);
+        } else {
+            return response()->json([
+                'status'    => false,
+            ]);
+        }
+    }
+
+    public function changeToken(Request $request)
+    {
+        $user = Admin::find($request->id);
+        if($user) {
+            $user->update([
+                'token' => Str::uuid()
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => "Đổi API Token thành công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đã có lỗi xảy ra!"
+            ]);
+        }
+    }
+
+    public function logout()
+    {
+        $check = Auth::guard('admin')->check();
+        if($check) {
+            Auth::guard('admin')->logout();
+
+            toastr()->success("Đăng Xuất Thành Công!");
+            return redirect('/admin/login');
+        } else {
+            toastr()->error("Đã có lỗi xảy ra, vui lòng đăng nhập lại!");
+            return redirect('/admin/login');
+        }
+
     }
 }

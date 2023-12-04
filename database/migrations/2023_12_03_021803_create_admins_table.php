@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('so_dien_thoai');
             $table->string('is_master')->default(0);
             $table->string('is_open')->default(1);
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }
