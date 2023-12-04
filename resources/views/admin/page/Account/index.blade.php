@@ -63,8 +63,8 @@
                                 <td class="align-middle">@{{ value.email }}</td>
                                 <td class="text-center align-middle">@{{ value.so_dien_thoai }}</td>
                                 <td class="text-center align-middle">
-                                    <button v-if="value.is_open == 1" class="btn btn-success">Hoạt Động</button>
-                                    <button v-else class="btn btn-danger">Tạm Tắt</button>
+                                    <button v-if="value.is_open == 1" class="btn btn-success" @click="changeStatus(value)">Hoạt Động</button>
+                                    <button v-else class="btn btn-danger" @click="changeStatus(value)">Tạm Tắt</button>
                                 </td>
                                 <td class="text-center align-middle">
                                     <div class="btn-group">
@@ -284,6 +284,24 @@
                         if(res.data.status) {
                             toastr.success(res.data.message);
                             $("#xoaModal").modal("hide");
+                            this.loadData(this.pagination.current_page)
+                        } else {
+                            toastr.error(res.data.message);
+                        }
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            toastr.error(v[0], 'Error');
+                        });
+                    });
+            },
+
+            changeStatus(value) {
+                axios
+                    .post('/admin/account/change-status', value)
+                    .then((res) => {
+                        if(res.data.status) {
+                            toastr.success(res.data.message);
                             this.loadData(this.pagination.current_page)
                         } else {
                             toastr.error(res.data.message);

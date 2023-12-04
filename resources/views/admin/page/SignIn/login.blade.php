@@ -82,7 +82,7 @@
                     .then((res) => {
                         if(res.data.status == 1) {
                             toastr.success(res.data.message);
-                            window.location.href = "/";
+                            window.location.href = "/admin";
                         } else {
                             toastr.error(res.data.message);
                         }
