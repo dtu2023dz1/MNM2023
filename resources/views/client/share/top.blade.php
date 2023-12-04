@@ -9,7 +9,8 @@
                         <!-- Logo -->
                         <div class="col-xl-3 col-lg-3 col-md-3 d-none d-md-block">
                             <div class="logo">
-                                <a><img src="https://dzfullstack.com/assets/images/logo-1.png" style="width: 60px" class="img-fluid" alt=""></a>
+                                <a><img src="https://dzfullstack.com/assets/images/logo-1.png" style="width: 60px"
+                                        class="img-fluid" alt=""></a>
                             </div>
                         </div>
                         {{-- <div class="col-xl-9 col-lg-9 col-md-9">
@@ -32,26 +33,21 @@
                             <div class="main-menu d-none d-md-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">about</a></li>
-                                        <li><a href="categori.html">Category</a></li>
-                                        <li><a href="latest_news.html">Latest News</a></li>
-                                        <li><a href="#">Pages</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="/">TRANG CHỦ</a></li>
+                                        <li><a href="/phap-dien">PHÁP ĐIỂN</a></li>
+                                        <li><a href="/chat">CHAT BOX</a></li>
+                                        <li><a href="/contact">LIÊN HỆ</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-4">
                             <div class="header-right f-right d-none d-lg-block">
-                                <div class="nav-search search-switch">
-                                    <i class="fa fa-search"></i>
+                                <div class="d-flex flex-row align-items-center">
+                                    <input style="border-radius: 100px" class="form-control" type="text" placeholder="Tìm kiếm..." />
+                                    <div class="nav-search search-switch">
+                                        <i class="fa fa-search"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
