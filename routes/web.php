@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AutoController;
+use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\ChatConTroller;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\ChuongController;
@@ -60,9 +61,6 @@ Route::group(['prefix'  =>  '/admin', "middleware" => "adminMiddleWare"], functi
         Route::post('/change-status', [AdminController::class, 'changeStatus']);
         Route::post('/change-token', [AdminController::class, 'changeToken']);
     });
-
-    Route::get('/logout', [AdminController::class, 'logout']);
-
 });
 
 Route::group([''], function() {
