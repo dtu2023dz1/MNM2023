@@ -26,12 +26,15 @@ Route::post('/admin/login', [AdminController::class, 'login']);
 
 Route::get('/data-excel', [AutoController::class, 'dataExcel']);
 Route::group(['prefix'  =>  '/admin', "middleware" => "adminMiddleWare"], function() {
+    Route::get('/', [AdminController::class, 'homePage']);
+
     Route::group(['prefix'  =>  '/chu-de'], function() {
         Route::get('/', [ChuDeController::class, 'viewChuDe']);
         Route::get('/data', [ChuDeController::class, 'getData']);
         Route::post('/doi-trang-thai', [ChuDeController::class, 'doiTrangThai']);
         Route::post('/update', [ChuDeController::class, 'updateChuDe']);
     });
+
     Route::group(['prefix'  =>  '/de-muc'], function() {
         Route::get('/', [DeMucController::class, 'viewDeMuc']);
         Route::get('/data', [DeMucController::class, 'getData']);
@@ -48,12 +51,18 @@ Route::group(['prefix'  =>  '/admin', "middleware" => "adminMiddleWare"], functi
     Route::group(['prefix'  =>  '/account'], function() {
         Route::get('/', [AdminController::class, 'index']);
         Route::get('/data', [AdminController::class, 'getData']);
+        Route::get('/get-token', [AdminController::class, 'getToken']);
 
         Route::post('/create', [AdminController::class, 'store']);
         Route::post('/update', [AdminController::class, 'update']);
         Route::post('/update-password', [AdminController::class, 'updatePasword']);
         Route::post('/delete', [AdminController::class, 'destroy']);
+        Route::post('/change-status', [AdminController::class, 'changeStatus']);
+        Route::post('/change-token', [AdminController::class, 'changeToken']);
     });
+
+    Route::get('/logout', [AdminController::class, 'logout']);
+
 });
 
 Route::group([''], function() {

@@ -21,5 +21,6 @@ class Admin extends Authenticatable
         'so_dien_thoai',
         'is_master',
         'is_open',
+        'token',
     ];
 }
