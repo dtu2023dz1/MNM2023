@@ -35,3 +35,4 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="/assets_client/js/plugins.js"></script>
 <script src="/assets_client/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

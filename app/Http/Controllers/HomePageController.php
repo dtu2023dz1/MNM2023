@@ -8,6 +8,6 @@ class HomePageController extends Controller
 {
     public function index()
     {
-        return view('client.share.master');
+        return view('client.page.homepage.index');
     }
 }
