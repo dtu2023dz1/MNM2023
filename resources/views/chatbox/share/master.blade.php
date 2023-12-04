@@ -222,7 +222,7 @@
                         message: text
                     }
                     this.list.push(res);
-                    this.speak(text)
+                    this.sendRequest(text);
                 }
                 recognition.start();
             },
@@ -254,8 +254,13 @@
             },
 
             sendRequest(text) {
-                console.log(text);
-                speak(text);
+                var text_return = " Trong chủ đề số 1: An ninh quốc gia, Ở đề mục số 7: Cơ yếu,Chương I NHỮNG QUY ĐỊNH CHUNG có nội dung: Điều 1.7.TL.2.2. Đối tượng áp dụng: Người làm công tác cơ yếu không phải là quân nhân, Công an nhân dân hưởng lương theo bảng lương cấp hàm cơ yếu và bảng lương chuyên môn kỹ thuật cơ yếu (sau đây gọi tắt là người làm công tác cơ yếu).. Ghi chú (Điều 2 Thông tư liên tịch số 11/2014/TTLT-BQP-BNV -BLĐTBXH-BTC, có hiệu lực thi hành kể từ ngày 19/04/2014) (link: http://vbpl.vn/TW/Pages/vbpq-toanvan.aspx?ItemID=102347#Chuong_I_Dieu_2)";
+                var res = {
+                        id: 1,
+                        message: text_return
+                    }
+                this.list.push(res);
+                this.speak(text_return)
             },
             async scrollToBottom() {
                 $('#chatbody').animate({
