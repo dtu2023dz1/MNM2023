@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Str;
 /**
  * @OA\Info(
  *    title="APIs DTU_DZ",
@@ -22,4 +23,21 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    public function getLinkUpdateAVT($folder, $file)
+    {
+        $root_path = public_path();
+
+        $file_extension = $file->getClientOriginalExtension();
+
+        $file_name = Str::slug($file->getClientOriginalName()) . "." . $file_extension;
+
+        $link = '/'.$folder.'/';
+
+        $path = $root_path . '/' . $link;
+
+        $file->move($path, $file_name);
+
+        return $link . $file_name;
+    }
 }

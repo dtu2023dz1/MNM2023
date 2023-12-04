@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AutoController;
+use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\ChatConTroller;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\ChuongController;
@@ -53,6 +54,15 @@ Route::group(['prefix'  =>  '/admin', "middleware" => "adminMiddleWare"], functi
         Route::post('/update', [AdminController::class, 'update']);
         Route::post('/update-password', [AdminController::class, 'updatePasword']);
         Route::post('/delete', [AdminController::class, 'destroy']);
+    });
+
+    Route::group(['prefix'  =>  '/bai-viet'], function() {
+        Route::get('/', [BaiVietController::class, 'index']);
+        Route::post('/create', [BaiVietController::class, 'createBaiViet']);
+        Route::get('/data', [BaiVietController::class, 'getData']);
+        Route::post('/status', [BaiVietController::class, 'statusBaiViet']);
+        Route::post('/delete', [BaiVietController::class, 'deleteBaiViet']);
+        Route::post('/update', [BaiVietController::class, 'updateBaiViet']);
     });
 });
 
