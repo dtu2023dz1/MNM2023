@@ -66,4 +66,6 @@ Route::group(['prefix'  =>  '/admin', "middleware" => "adminMiddleWare"], functi
 Route::group([''], function() {
     Route::get('/', [HomePageController::class, 'index']);
     Route::get('/chat', [ChatConTroller::class, 'index']);
+    Route::get('/contact', [ChatConTroller::class, 'indexContact']);
+    Route::get('/phap-dien', [ChatConTroller::class, 'indexPhapDien']);
 });

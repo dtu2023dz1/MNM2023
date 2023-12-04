@@ -10,4 +10,14 @@ class ChatConTroller extends Controller
     {
         return view('chatbox.share.master');
     }
+
+    public function indexContact()
+    {
+        return view('client.page.homepage.contact');
+    }
+
+    public function indexPhapDien()
+    {
+        return view('client.page.homepage.phap_dien');
+    }
 }
