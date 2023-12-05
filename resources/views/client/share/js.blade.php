@@ -35,7 +35,4 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="/assets_client/js/plugins.js"></script>
 <script src="/assets_client/js/main.js"></script>
-<script src="/assets_client/js/tree/jstree.min.js"></script>
-<script src="/assets_client/js/tree/tree.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.16/jstree.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
