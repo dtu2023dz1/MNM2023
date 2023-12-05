@@ -18,7 +18,6 @@
                             <tr>
                                 <th class="text-center align-middle text-nowrap">#</th>
                                 <th class="text-center align-middle text-nowrap">Tên Chương</th>
-                                <th class="text-center align-middle text-nowrap">Tên Chủ Đề</th>
                                 <th class="text-center align-middle text-nowrap">Tên Đề Mục</th>
                                 <th class="text-center align-middle text-nowrap">Số Thứ Tự</th>
                                 <th class="text-center align-middle text-nowrap">Trạng Thái</th>
@@ -30,7 +29,6 @@
                                 <tr>
                                     <th class="align-middle text-center">@{{ key + 1 }}</th>
                                     <td class="align-middle">@{{ value.ten_chuong }}</td>
-                                    <td class="align-middle">@{{ value.ten_chu_de }}</td>
                                     <td class="align-middle">@{{ value.ten_de_muc }}</td>
                                     <td class="align-middle text-center">@{{ value.so_thu_tu }}</td>
                                     <td class="align-middle text-center text-nowrap">
@@ -38,7 +36,7 @@
                                         <button class="btn btn-outline-danger" style="width: 100%" v-on:click="doiTrangThai(value)" v-else>Hết Hạn</button>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <button class="btn btn-outline-primary" v-on:click="edit = Object.assign({}, value)" data-toggle="modal" data-target="#capNhatChuongModal">
+                                        <button class="btn btn-outline-primary" v-on:click="edit = Object.assign({}, value), loadDeMuc(edit.id_de_muc)" data-toggle="modal" data-target="#capNhatChuongModal">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </button>
                                     </td>
@@ -84,6 +82,14 @@
                                 <input type="text" class="form-control" v-model="edit.so_thu_tu">
                             </div>
                             <div class="mt-2">
+                                <label>Đề Mục</label>
+                                <select class="form-control" v-model="edit.id_de_muc">
+                                    <template v-for="(value, key) in list_de_muc">
+                                        <option v-bind:value="value.id">@{{ value.ten_de_muc }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="mt-2">
                                 <label>Trạng thái</label>
                                 <select class="form-control" v-model="edit.is_open">
                                     <option value="1">Đang Hoạt Động</option>
@@ -115,8 +121,9 @@
                 to: 0,
                 current_page: 1
             },
+            list_de_muc : [],
             check       : true,
-            offset: 4,
+            offset      : 4,
             list_chuong : [],
             edit        : {}
         },
@@ -124,14 +131,6 @@
             this.getVueItems(this.pagination.current_page);
         },
         methods :   {
-            loadData(){
-                axios
-                    .get('/admin/chuong/data')
-                    .then((res) => {
-                        this.list_chuong = res.data.data;
-                    });
-            },
-
             doiTrangThai(value){
                 axios
                     .post('/admin/chuong/doi-trang-thai', value)
@@ -169,6 +168,7 @@
                 axios
                     .get('/admin/chuong/data?page='+page) // đổi link ở đây
                     .then((res) => {
+                        this.list_de_muc = res.data.deMuc;
                         this.list_chuong = res.data.data.data.data;
                         this.pagination = res.data.data.pagination;
                     });

@@ -82,6 +82,14 @@
                                 <input type="text" class="form-control" v-model="edit.so_thu_tu">
                             </div>
                             <div class="mt-2">
+                                <label>Chủ Đề</label>
+                                <select class="form-control" v-model="edit.id_chu_de">
+                                    <template v-for="(value, key) in list_chu_de">
+                                        <option v-bind:value="value.id">@{{ value.ten_chu_de }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="mt-2">
                                 <label>Trạng thái</label>
                                 <select class="form-control" v-model="edit.is_open">
                                     <option value="1">Đang Hoạt Động</option>
@@ -113,6 +121,7 @@
                 to: 0,
                 current_page: 1
             },
+            list_chu_de : [],
             check       : true,
             offset: 4,
             list_de_muc : [],
@@ -122,13 +131,6 @@
             this.getVueItems(this.pagination.current_page);
         },
         methods :   {
-            loadData(){
-                axios
-                    .get('/admin/de-muc/data')
-                    .then((res) => {
-                        this.list_de_muc = res.data.data;
-                    });
-            },
 
             doiTrangThai(value){
                 axios
@@ -167,6 +169,7 @@
                 axios
                     .get('/admin/de-muc/data?page='+page) // đổi link ở đây
                     .then((res) => {
+                        this.list_chu_de = res.data.chuDe;
                         this.list_de_muc = res.data.data.data.data;
                         this.pagination = res.data.data.pagination;
                     });

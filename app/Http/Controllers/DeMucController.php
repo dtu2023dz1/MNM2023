@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuDe;
 use App\Models\DeMuc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Js;
@@ -38,8 +39,11 @@ class DeMucController extends Controller
             'data' => $data,
         ];
 
+        $chuDe = ChuDe::where('is_open', 1)->get();
+
         return response()->json([
             'data'    => $response,
+            'chuDe'   => $chuDe
         ]);
     }
 

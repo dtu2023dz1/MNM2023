@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuDe;
 use App\Models\Chuong;
+use App\Models\DeMuc;
 use Illuminate\Http\Request;
 
 class ChuongController extends Controller
@@ -15,7 +17,7 @@ class ChuongController extends Controller
     public function getData()
     {
         $data = Chuong::join('de_mucs', 'de_mucs.id', 'chuongs.id_de_muc')
-                      ->join('chu_des', 'chu_des.id', 'chuongs.id_de_muc')
+                      ->join('chu_des', 'chu_des.id', 'chuongs.id_chu_de')
                       ->select('chuongs.*', 'chu_des.ten_chu_de', 'de_mucs.ten_de_muc')
                       ->paginate(env('PAGINATE_ADMIN'));
 
@@ -31,8 +33,11 @@ class ChuongController extends Controller
             'data' => $data,
         ];
 
+        $deMuc = DeMuc::where('is_open', 1)->get();
+
         return response()->json([
-            'data'    => $response,
+            'data'      => $response,
+            'deMuc'     => $deMuc
         ]);
     }
 
@@ -75,5 +80,14 @@ class ChuongController extends Controller
                 'message'   => 'Có lỗi!',
             ]);
         }
+    }
+
+    public function getDataDeMuc($id)
+    {
+        $data = DeMuc::where('id_chu_de', $id)->get();
+
+        return response()->json([
+            'data'    => $data,
+        ]);
     }
 }
