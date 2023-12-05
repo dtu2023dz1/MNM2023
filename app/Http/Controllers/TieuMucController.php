@@ -20,7 +20,10 @@ class TieuMucController extends Controller
     public function store(Request $request)
     {
         $res = $request->all();
-        CreateTieuMucJob::dispatch($res);
+        $list_chuong = $res['data'];
+        foreach ($list_chuong as $key => $value) {
+            CreateTieuMucJob::dispatch($value, $res['id_chu_de'], $res['id_de_muc']);
+        }
         return response()->json([
             'status'    => true,
             'message'   => 'Đã xử lý, vui lòng chờ'

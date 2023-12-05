@@ -14,8 +14,7 @@ class DeMucController extends Controller
 
     public function getDataAPI()
     {
-        $data = DeMuc::all();
-
+        $data = DeMuc::get();
         return response()->json([
             'data' => $data
         ]);
