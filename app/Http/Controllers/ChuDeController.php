@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChuDe;
+use App\Models\Chuong;
+use App\Models\DeMuc;
 use Illuminate\Http\Request;
 
 class ChuDeController extends Controller
@@ -71,5 +73,21 @@ class ChuDeController extends Controller
                 'message'   => 'Có lỗi!',
             ]);
         }
+    }
+
+    public function searchPhapDien(Request $request)
+    {
+        // dd($request->all());
+        $data_chu_de = ChuDe::where('id', $request->id_chu_de)->get();
+        $data_de_muc = DeMuc::where('id', $request->id_de_muc)
+                            ->get();
+        $data_chuong = Chuong::where('id_chu_de', $request->id_chu_de)
+                             ->where('id_de_muc', $request->id_de_muc)
+                             ->get();
+        return response()->json([
+            'data_chu_de'   => $data_chu_de,
+            'data_de_muc'   => $data_de_muc,
+            'data_chuong'   => $data_chuong,
+        ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\API\APIChuDeController;
 use App\Http\Controllers\API\APIChuongController;
 use App\Http\Controllers\API\APIDeMucController;
 use App\Http\Controllers\AutoController;
+use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\DeMucController;
 use App\Http\Controllers\TieuMucController;
 use App\Models\TieuMuc;
@@ -31,12 +32,16 @@ Route::get('/create-data-tieu-muc', [TieuMucController::class, 'storeApi']);
 Route::get('/get-data-de-muc-api', [DeMucController::class, 'getDataAPI']);
 Route::post('/create-tieu-muc', [TieuMucController::class, 'store']);
 Route::get('/data-excel', [AutoController::class, 'dataExcel']);
+Route::get('/create-de-muc-data/{id}', [DeMucController::class, 'createDataDeMuc']);
+Route::post('/search-phap-dien', [ChuDeController::class, 'searchPhapDien']);
+
 
 Route::group(['prefix'  =>  '/admin'], function() {
     Route::group(['prefix'  =>  '/chu-de'], function() {
         Route::get('/data', [APIChuDeController::class, 'getData']);
         Route::post('/doi-trang-thai', [APIChuDeController::class, 'doiTrangThai']);
         Route::post('/update', [APIChuDeController::class, 'updateChuDe']);
+
     });
 
     Route::group(['prefix'  =>  '/de-muc'], function() {

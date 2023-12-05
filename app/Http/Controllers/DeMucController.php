@@ -87,4 +87,13 @@ class DeMucController extends Controller
             ]);
         }
     }
+
+    public function createDataDeMuc($id)
+    {
+        $data = DeMuc::where('id_chu_de', $id)->get();
+        // dd($data->toArray());
+        return response()->json([
+            'data'    => $data,
+        ]);
+    }
 }
