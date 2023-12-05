@@ -19,9 +19,7 @@
 <link rel="stylesheet" href="/assets_client/css/slick.css">
 <link rel="stylesheet" href="/assets_client/css/nice-select.css">
 <link rel="stylesheet" href="/assets_client/css/style.css">
-<link rel="stylesheet" href="/assets_client/css/vendor/tree.css">
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@icon/icofont@1.0.1-alpha.1/icofont.min.css">

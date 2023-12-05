@@ -59,9 +59,9 @@
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                         <div class="single-footer-caption mb-50">
-                            <div class="banner">
+                            {{-- <div class="banner">
                                 <img src="/assets_client/img/gallery/body_card4.png" alt="">
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
