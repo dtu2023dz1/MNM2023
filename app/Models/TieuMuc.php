@@ -19,5 +19,10 @@ class TieuMuc extends Model
         'hash_chu_de',
         'hash_de_muc',
         'hash_chuong',
+        'ghi_chu',
+        'link_ghi_chu',
+        'noi_dung',
+        'chi_dan',
+        'link_chi_dan',
     ];
 }

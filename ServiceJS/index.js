@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
 import express from 'express';
+import async from 'async';
 const app = express()
 
 const LINK_GET = "http://127.0.0.1:8000/api"
@@ -37,117 +38,146 @@ async function getDataDetail(element) {
         const dom = new JSDOM(htmlSnippet);
         const doc = dom.window.document;
         const contentDivs = doc.querySelectorAll('div._content');
-        var MPC_chuong = null;
-        var res = {
-            'MPC_chuong': MPC_chuong,
-            'ten_chuong': "",
-            'data': []
-        };
-        var payload = [];
+        var list_chuong = [];
+        var list_index  = [];
+        var MPC_chuong  = null;
         contentDivs.forEach((contentDiv) => {
             const paragraphs = contentDiv.querySelectorAll('p');
-            var res_data = {
-                'ten_dieu': null,
-                'ghi_chu': null,
-                'link_ghi_chu': null,
-                'noi_dung': null,
-                'chi_dan': null,
-                'link_chi_dan': null,
-                'MAPC': null
-            };
-            paragraphs.forEach((paragraph, index) => {
+            var MA_DIEU = null;
+            for (var index = 0; index < paragraphs.length; index++) {
+                var paragraph = paragraphs[index];
                 const className = paragraph.className;
                 const textContent = trimText(paragraph.textContent);
                 if (className === 'pChuong') {
                     const links = paragraph.querySelectorAll('a');
-                    links.forEach((link) => {
-                        const name_value = link.getAttribute('name');
-                        if (name_value != MPC_chuong) {
-                            if (MPC_chuong != null) {
-                                payload.push(res);
-                                res = {
-                                    'MPC_chuong': MPC_chuong,
-                                    'ten_chuong': "",
-                                    'data': []
+                    if (textContent.includes("Chương")) {
+                        links.forEach((link) => {
+                            const name_value = link.getAttribute('name');
+                            if (name_value != MPC_chuong) {
+                                list_chuong.push({
+                                    'MPC_chuong': name_value,
+                                    'ten_chuong': textContent,
+                                    'data': [],
+                                    'vi_tri': index
+                                });
+                                list_index.push(index);
+                            }
+                        });
+                    }
+                }
+            }
+            list_chuong.forEach(function (value, index_key, array) {
+                var list = [];
+                var res_data = {
+                    'ten_tieu_muc': null,
+                    'ghi_chu': null,
+                    'link_ghi_chu': null,
+                    'noi_dung': '',
+                    'chi_dan': null,
+                    'link_chi_dan': null,
+                    'MAPC': null
+                };
+                var key = value.vi_tri + 1;
+                try {
+                    var vi_tri_dong_for = 0;
+                    if(index_key == list_chuong.length - 1) {
+                        vi_tri_dong_for = paragraphs.length - 1;
+                    } else {
+                        vi_tri_dong_for = list_index[index_key + 1];
+                    }
+                    for (key; key <= vi_tri_dong_for; key++) {
+                        var paragraph = paragraphs[key];
+                        if (key == vi_tri_dong_for) {
+                            list.push(res_data);
+                        }
+                        if (key + 1 <= vi_tri_dong_for) {
+                            var paragraph_nex = paragraphs[key + 1];
+                            if (paragraph_nex.className == "pDieu" && res_data.ten_tieu_muc != null) {
+                                list.push(res_data);
+                                res_data = {
+                                    'ten_tieu_muc': null,
+                                    'ghi_chu': null,
+                                    'link_ghi_chu': null,
+                                    'noi_dung': '',
+                                    'chi_dan': null,
+                                    'link_chi_dan': null,
+                                    'MAPC': null
                                 };
                             }
-                            MPC_chuong = name_value;
-                            res.MPC_chuong = MPC_chuong;
                         }
-                    });
-                    res.ten_chuong = res.ten_chuong + textContent + " ";
-                } else if (className === 'pDieu') {
-                    const links = paragraph.querySelectorAll('a');
-                    links.forEach((link) => {
-                        const MAPC_DIEU = link.getAttribute('name');
-                        res_data.MAPC = MAPC_DIEU
-                    });
-                    res_data.ten_dieu = textContent;
-
-                } else if (className === 'pGhiChu') {
-                    const links = paragraph.querySelectorAll('a');
-                    links.forEach((link) => {
-                        const linkHref = link.getAttribute('href');
-                        res_data.link_ghi_chu = linkHref;
-                    });
-                    res_data.ghi_chu = textContent;
-                } else if (className === 'pChiDan') {
-                    const links = paragraph.querySelectorAll('a');
-                    links.forEach((link) => {
-                        const linkHref = link.getAttribute('href');
-                        res_data.link_chi_dan = linkHref;
-                    });
-                    res_data.chi_dan = textContent;
-                } else {
-                    try {
-                        if (paragraphs[index + 1].className === "pDieu") {
-                            res.data.push(res_data);
-                            res_data = {
-                                'ten_dieu': null,
-                                'ghi_chu': null,
-                                'link_ghi_chu': null,
-                                'noi_dung': null,
-                                'chi_dan': null,
-                                'link_chi_dan': null,
-                                'MAPC': null
-                            };
+                        const className = paragraph.className;
+                        const textContent = trimText(paragraph.textContent);
+                        if (className === 'pDieu') {
+                            const links = paragraph.querySelectorAll('a');
+                            const MAPC_DIEU = links[0].getAttribute('name');
+                            MA_DIEU = MAPC_DIEU;
+                            res_data.MAPC = MAPC_DIEU
+                            res_data.ten_tieu_muc = textContent;
+                        } else if (className === 'pGhiChu') {
+                            const links = paragraph.querySelectorAll('a');
+                            links.forEach((link) => {
+                                const linkHref = link.getAttribute('href');
+                                res_data.link_ghi_chu = linkHref;
+                            });
+                            res_data.ghi_chu = textContent;
+                        } else if (className === 'pChiDan') {
+                            const links = paragraph.querySelectorAll('a');
+                            links.forEach((link) => {
+                                const linkHref = link.getAttribute('href');
+                                res_data.link_chi_dan = linkHref;
+                            });
+                            res_data.chi_dan = textContent;
+                        } else {
+                            res_data.noi_dung = res_data.noi_dung + textContent + ". ";
                         }
-                    } catch (error) {
-
                     }
+                    value.data = list;
+                } catch (error) {
+                    console.log(index_key);
                 }
             });
         });
-        return payload;
+        return list_chuong;
     } catch (error) {
         console.log(error);
     }
 }
 
+async function asyncTaskFunction(element) {
+    var res_detail = await getDataDetail(element)
+    var res_post = {
+        'id_de_muc': element.id,
+        'id_chu_de': element.id_chu_de,
+        'data': res_detail
+    }
+    await postData(res_post);
+    callback(); // Gọi callback để thông báo rằng công việc đã hoàn thành
+}
+
 async function getDataPL() {
     try {
-        const list_de_muc = await axios.get(LINK_GET + '/get-data-de-muc');
-        var element = list_de_muc.data.data[3];
-        // await list_de_muc.data.forEach(async element =>  {
+        const list_de_muc = await axios.get(LINK_GET + '/get-data-de-muc-api');
+        const taskQueue = async.queue(asyncTaskFunction, 1);
+        await list_de_muc.data.data.forEach(async element =>  {
+            setTimeout(() => {
+                console.log("Da vao day element " + element.ten_de_muc);
+                taskQueue.push(element);
+            }, 2000);
+        });
+        taskQueue.drain(() => {
+            console.log('Tất cả công việc đã hoàn thành');
+            return {
+                'status': true,
+                'message': "Đã get dữ liệu và thêm mới thành công!",
+            }
+        });
 
-        //     var res_post = {
-        //         'id_chu_de' : element.id,
-        //         'data'      : payload
-        //     }
-        //     await postData(res_post);
-        // });
-        var res_detail = await getDataDetail(element)
-        var res_post = {
-            'id_de_muc': element.id,
-            'id_chu_de': element.id_chu_de,
-            'data': res_detail
-        }
-        await postData(res_post);
         return {
             'status': true,
             'message': "Đã get dữ liệu và thêm mới thành công!",
         }
     } catch (error) {
+        console.log(error);
         return {
             'status': false,
             'message': "Đã có lỗi",
@@ -156,13 +186,15 @@ async function getDataPL() {
     }
 };
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 function trimText(text) {
     return text.replace(/\s+/g, ' ').trim();
 }
 
 app.get('/get-data', async (req, res) => {
     const respone = await getDataPL();
-    console.log("Đã Lấy Xong");
     res.status(200).send(respone)
 })
 const port = 3000;

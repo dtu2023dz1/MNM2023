@@ -89,6 +89,7 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
         http://127.0.0.1:3000/get-data
 
+
 ## Giấy phép
 
 Laravel framework là phần mềm nguồn mở được cấp phép theo giấy phép [MIT license](https://opensource.org/licenses/MIT).
@@ -96,3 +97,4 @@ Laravel framework là phần mềm nguồn mở được cấp phép theo giấy
 Giấy phép từ [ThemeWagon](https://themewagon.com/license/) giao diện nguồn mở được sử dụng để phát triển dự án
 
 Giấy phép từ [AdminLTE](https://adminlte.io/docs/3.0/license.html) giao diện nguồn mở được sử dụng để phát triển dự án
+
