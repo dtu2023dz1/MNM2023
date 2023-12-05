@@ -58,7 +58,7 @@
                     .then((res) => {
                         if(res.data.status) {
                             toastr.success(res.data.message);
-                            this.getToken();
+                            this.user.token = res.data.token;
                         } else {
                             toastr.error(res.data.message);
                         }

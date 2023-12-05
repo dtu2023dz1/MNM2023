@@ -182,13 +182,15 @@ class AdminController extends Controller
     {
         $user = Admin::find($request->id);
         if($user) {
+            $token = Str::uuid();
             $user->update([
-                'token' => Str::uuid()
+                'token' => $token
             ]);
 
             return response()->json([
-                'status' => true,
-                'message' => "Đổi API Token thành công!"
+                'status'    => true,
+                'message'   => "Đổi API Token thành công!",
+                'token'     => $token
             ]);
         } else {
             return response()->json([
