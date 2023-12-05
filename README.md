@@ -78,7 +78,16 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
         php artisan serve
 
+8.  Chạy lệnh sau để
 
+        php artisan queue:work
+9.  Chạy sever node
+
+        cd ServiceJS
+        node index.js
+10. Dùng postman chạy link (dùng để gọi server node để lấy dữ liệu tiểu mục)
+
+        http://127.0.0.1:3000/get-data
 
 
 ## Giấy phép
@@ -86,3 +95,6 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 Laravel framework là phần mềm nguồn mở được cấp phép theo giấy phép [MIT license](https://opensource.org/licenses/MIT).
 
 Giấy phép từ [ThemeWagon](https://themewagon.com/license/) giao diện nguồn mở được sử dụng để phát triển dự án
+
+Giấy phép từ [AdminLTE](https://adminlte.io/docs/3.0/license.html) giao diện nguồn mở được sử dụng để phát triển dự án
+
