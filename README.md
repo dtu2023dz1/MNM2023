@@ -29,10 +29,6 @@ Bạn cũng có thể dùng thử [Laravel Bootcamp](https://bootcamp.laravel.co
 
 Nếu bạn không muốn đọc, [Laracasts](https://laracasts.com) có thể giúp đỡ. Laracasts chứa hơn 2000 video hướng dẫn về nhiều chủ đề bao gồm Laravel, PHP hiện đại, thử nghiệm đơn vị và JavaScript. Nâng cao kỹ năng của bạn bằng cách tìm hiểu thư viện video toàn diện của chúng tôi.
 
-## Nhà tài trợ Laravel
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
 ### Đối tác cao cấp
 
 - **[Vehikl](https://vehikl.com/)**
@@ -48,6 +44,26 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[Active Logic](https://activelogic.com)**
 - **[byte5](https://byte5.de)**
 - **[OP.GG](https://op.gg)**
+## Ngôn ngữ sử dụng
+
+🔑 PHP
+
+🔑 Python
+
+🔑 Jquery
+
+🔑 Javascript
+
+🔑 Vuejs
+
+🔑 NodeJs
+
+## Cơ sở dữ liệu
+
+🔑 MySQL
+## Thông tin về dự án
+Phần mềm hỗ trợ tra cứu thông tin về pháp luật bằng từ khóa, hỗ trợ tra cứu thông tin xử lý bằng giọng nói, chatbot hỗ trợ trả lời những câu hỏi liên quan quan đến pháp luật.
+
 
 ## Chạy dự án
 1. Yêu cầu cài đặt môi trường [XAMPP](https://www.apachefriends.org/download.html) 8.1 trở lên.
@@ -88,8 +104,52 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 10. Dùng postman chạy link (dùng để gọi server node để lấy dữ liệu tiểu mục)
 
         http://127.0.0.1:3000/get-data
+## Sử dụng Chatbot
+Hầu hết các mô-đun được viết bằng ngôn ngữ Python phiên bản 3.
 
+Đầu tiên, tạo venv
+```sh
+python3 -m venv venv
+source <venv>/bin/activate
+```
+Hãy cài đặt thư viện
+```sh
+pip install -r requirements.txt
+```
+Bước đầu tiên, huấn luyện mô hình (Từ dữ liệu đầu vào của các câu trả lời, bạn có thể tạo câu hỏi cho các câu trả lời đó):
+```sh
+python3 index.py
+```
+Bước tiếp theo, hãy thử sử dụng hàm tĩnh
+```sh
+python3 main.py --message "Điều 15 của Nghị định số 127/2006/NĐ-CP nói về điều gì?"
+```
+API của dự án này được xây dựng trên nền tảng FastApi, hãy thử sử dụng nó với API
+```sh
+uvicorn server:app --reload 
+```
+Kết quả được hiển thị
+```sh
+INFO:     Will watch for changes in these directories: 
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [462581] using WatchFiles
+INFO:     Started server process [462602]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+```
+Thông báo này ngụ ý rằng có một API đang lắng nghe trên cổng 8000 trên máy của bạn. Để gọi đây là:
+```sh
+curl --location --request POST 'http://127.0.0.1:8000/message' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "msg": "Điều 15 của Nghị định số 127/2006/NĐ-CP nói về điều gì?"
+}'
+```
+## REST APIs
+        https://lawnavigator.dzfullstack.com/api/documentation
 
+## Lawnavigator.dzfullstack
+   [Live preview](https://lawnavigator.dzfullstack.com/)
 ## Giấy phép
 
 Laravel framework là phần mềm nguồn mở được cấp phép theo giấy phép [MIT license](https://opensource.org/licenses/MIT).
@@ -97,4 +157,9 @@ Laravel framework là phần mềm nguồn mở được cấp phép theo giấy
 Giấy phép từ [ThemeWagon](https://themewagon.com/license/) giao diện nguồn mở được sử dụng để phát triển dự án
 
 Giấy phép từ [AdminLTE](https://adminlte.io/docs/3.0/license.html) giao diện nguồn mở được sử dụng để phát triển dự án
+
+## Author
+1.  Lê Thanh Trường
+2.  Trần Trung Trực
+3.  Nguyễn Ngọc Khánh
 
