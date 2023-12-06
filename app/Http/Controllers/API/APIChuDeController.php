@@ -38,8 +38,16 @@ class APIChuDeController extends Controller
      * )
      */
 
-    public function getData()
+    public function getData(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
         $data = ChuDe::get();
 
         // $response = [
