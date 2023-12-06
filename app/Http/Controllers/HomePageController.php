@@ -22,4 +22,10 @@ class HomePageController extends Controller
         $line_4 = BaiViet::where('tinh_trang', 1)->get();
         return view('client.page.homepage.index', compact('line_1', 'line_2', 'line_3', 'line_4'));
     }
+
+    public function indexBaiViet($id)
+    {
+        $bai_viet = BaiViet::find($id);
+        return view('client.page.homepage.index_detail', compact('bai_viet'));
+    }
 }

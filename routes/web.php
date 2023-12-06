@@ -80,4 +80,5 @@ Route::group([''], function() {
     Route::get('/chu-de/data-homepage', [ChuDeController::class, 'getDataHomePage']);
     Route::get('/de-muc/data-homepage', [DeMucController::class, 'getDataHomePage']);
     Route::get('/chuong/data-homepage', [ChuongController::class, 'getDataHomePage']);
+    Route::get('/bai-viet/{id}', [HomePageController::class, 'indexBaiViet']);
 });

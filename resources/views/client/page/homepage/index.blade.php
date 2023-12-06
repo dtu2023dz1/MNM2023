@@ -16,7 +16,7 @@
                                         <img src="{{ $value->hinh_anh }}" class="img-fluid" style="height: 600px" alt="">
                                         <div class="trend-top-cap">
                                             <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">NEW</span>
-                                            <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{ $value->ten_bai_viet }}</a></h2>
+                                            <h2><a href="/bai-viet/{{ $value->id }}" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{ $value->ten_bai_viet }}</a></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                                         <img src="{{$left->hinh_anh}}" alt="">
                                                     </div>
                                                     <div class="whates-caption">
-                                                        <h4><a href="latest_news.html">{{$left->ten_bai_viet}}</a></h4>
+                                                        <h4><a href="/bai-viet/{{ $left->id }}">{{$left->ten_bai_viet}}</a></h4>
                                                         <p></p>
                                                     </div>
                                                 </div>
@@ -82,7 +82,7 @@
                                                                 </div>
                                                                 <div class="whats-right-cap">
                                                                     {{-- <span class="colorb">Tin Tức</span> --}}
-                                                                    <h4><a href="latest_news.html">{{ $value->ten_bai_viet }}</a></h4>
+                                                                    <h4><a href="/bai-viet/{{ $value->id }}">{{ $value->ten_bai_viet }}</a></h4>
                                                                     <p></p>
                                                                 </div>
                                                             </div>
@@ -119,7 +119,7 @@
                                                             </div>
                                                             <div class="whats-right-cap">
                                                                 <span class="colorb">FASHION</span>
-                                                                <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
+                                                                <h4><a href="/bai-viet/{{ $value->id }}">Portrait of group of friends ting eat. market in.</a></h4>
                                                                 <p>Jun 19, 2020</p>
                                                             </div>
                                                         </div>
@@ -131,7 +131,7 @@
                                                             </div>
                                                             <div class="whats-right-cap">
                                                                 <span class="colorb">FASHION</span>
-                                                                <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
+                                                                <h4><a href="/bai-viet/{{ $value->id }}">Portrait of group of friends ting eat. market in.</a></h4>
                                                                 <p>Jun 19, 2020</p>
                                                             </div>
                                                         </div>
@@ -143,7 +143,7 @@
                                                             </div>
                                                             <div class="whats-right-cap">
                                                                 <span class="colorg">FASHION</span>
-                                                                <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
+                                                                <h4><a href="/bai-viet/{{ $value->id }}">Portrait of group of friends ting eat. market in.</a></h4>
                                                                 <p>Jun 19, 2020</p>
                                                             </div>
                                                         </div>
@@ -155,7 +155,7 @@
                                                             </div>
                                                             <div class="whats-right-cap">
                                                                 <span class="colorr">FASHION</span>
-                                                                <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
+                                                                <h4><a href="/bai-viet/{{ $value->id }}">Portrait of group of friends ting eat. market in.</a></h4>
                                                                 <p>Jun 19, 2020</p>
                                                             </div>
                                                         </div>
@@ -186,7 +186,7 @@
                             <div class="most-recent-img">
                                 <img src="{{$line_3[0]->hinh_anh}}" alt="">
                                 <div class="most-recent-cap">
-                                    <h4><a href="latest_news.html">{{ $line_3[0]->ten_bai_viet }}</a></h4>
+                                    <h4><a href="/bai-viet/{{ $line_3[0]->id }}">{{ $line_3[0]->ten_bai_viet }}</a></h4>
                                     <p>Admin</p>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@
                                 <img src="{{ $value->hinh_anh }}" style="width: 85px; height: 79px;" alt="">
                             </div>
                             <div class="most-recent-capt">
-                                <h4><a href="latest_news.html">{{ $value->ten_bai_viet }}</a></h4>
+                                <h4><a href="/bai-viet/{{ $value->id }}">{{ $value->ten_bai_viet }}</a></h4>
                                 <p>Admin</p>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                                     <img src="/assets_client/img/gallery/tranding1.png" alt="">
                                 </div>
                                 <div class="what-cap">
-                                    <h4><a href="#" > <h4><a href="latest_news.html">What to Expect From the 2020 Oscar Nomin ations</a></h4></a></h4>
+                                    <h4><a href="#" > <h4><a href="/bai-viet/{{ $value->id }}">What to Expect From the 2020 Oscar Nomin ations</a></h4></a></h4>
                                     <P>Jun 19, 2020</P>
                                     <a class="popup-video btn-icon" href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><span class="flaticon-play-button"></span></a>
 
@@ -242,7 +242,7 @@
                                     <img src="/assets_client/img/gallery/tranding2.png" alt="">
                                 </div>
                                 <div class="what-cap">
-                                    <h4><a href="latest_news.html">What to Expect From the 2020 Oscar Nomin ations</a></h4>
+                                    <h4><a href="/bai-viet/{{ $value->id }}">What to Expect From the 2020 Oscar Nomin ations</a></h4>
                                     <P>Jun 19, 2020</P>
                                     <a class="popup-video" href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><span class="flaticon-play-button"></span></a>
                                 </div>
@@ -253,7 +253,7 @@
                                     <img src="/assets_client/img/gallery/tranding1.png" alt="">
                                 </div>
                                 <div class="what-cap">
-                                    <h4><a href="latest_news.html"> <h4><a href="latest_news.html">What to Expect From the 2020 Oscar Nomin ations</a></h4></a></h4>
+                                    <h4><a href="/bai-viet/{{ $value->id }}"> <h4><a href="/bai-viet/{{ $value->id }}">What to Expect From the 2020 Oscar Nomin ations</a></h4></a></h4>
                                     <P>Jun 19, 2020</P>
                                     <a class="popup-video" href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><span class="flaticon-play-button"></span></a>
                                 </div>
@@ -264,7 +264,7 @@
                                     <img src="/assets_client/img/gallery/tranding2.png" alt="">
                                 </div>
                                 <div class="what-cap">
-                                    <h4><a href="latest_news.html">What to Expect From the 2020 Oscar Nomin ations</a></h4>
+                                    <h4><a href="/bai-viet/{{ $value->id }}">What to Expect From the 2020 Oscar Nomin ations</a></h4>
                                     <P>Jun 19, 2020</P>
                                     <a class="popup-video" href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><span class="flaticon-play-button"></span></a>
                                 </div>
@@ -299,7 +299,7 @@
                                                     <img src="{{ $value->hinh_anh }}" alt="" style="width: 255px; height: 170px;">
                                                 </div>
                                                 <div class="weekly3-caption">
-                                                    <h4><a href="latest_news.html">{{ $value->ten_bai_viet }}</a></h4>
+                                                    <h4><a href="/bai-viet/{{ $value->id }}">{{ $value->ten_bai_viet }}</a></h4>
                                                     <p></p>
                                                 </div>
                                             </div>
