@@ -13,7 +13,7 @@ class AutoController extends Controller
         $data = TieuMuc::join('chuongs', 'chuongs.id', 'tieu_mucs.id_chuong')
                        ->join('chu_des', 'chu_des.id', 'tieu_mucs.id_chu_de')
                        ->join('de_mucs', 'de_mucs.id', 'tieu_mucs.id_de_muc')
-                       ->whereIn('tieu_mucs.id_chu_de', [37, 36])
+                       ->whereIn('tieu_mucs.id_chu_de', [14])
                        ->select(
                             DB::raw('CONCAT("Trong chủ đề số ", chu_des.so_thu_tu ,": ", chu_des.ten_chu_de, ", ") as chu_de_content'),
                             DB::raw('CONCAT("Ở đề mục số ", de_mucs.so_thu_tu ,": ", de_mucs.ten_de_muc, ",") as de_muc_content'),
@@ -23,6 +23,7 @@ class AutoController extends Controller
                             DB::raw('CONCAT("Chỉ dẫn ",tieu_mucs.chi_dan ," (", tieu_mucs.link_chi_dan, ")") as chi_dan_content'),
                        )
                     //    ->whereRaw('CHAR_LENGTH(tieu_mucs.noi_dung) <= 3000')
+                       ->take(50)
                        ->get();
         // dd($data->toArray());
         foreach ($data as $key => $value) {
