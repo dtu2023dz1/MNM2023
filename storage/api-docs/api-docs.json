@@ -110,10 +110,321 @@
                 }
             }
         },
+        "/api/admin/bai-viet/data": {
+            "get": {
+                "tags": [
+                    "Bài Viết"
+                ],
+                "summary": "Bai Viet Data",
+                "description": "Get Data Bai Viet",
+                "operationId": "f24a31a98f8d4ea7e0c5c4b48cc0ebcd",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    }
+                }
+            }
+        },
+        "/api/admin/bai-viet/create": {
+            "post": {
+                "tags": [
+                    "Bài Viết"
+                ],
+                "summary": "Create Bai Viet",
+                "description": "",
+                "operationId": "e48eb2891403f774f2bb5ac3d607544b",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "ten_bai_viet",
+                                    "slug_bai_viet",
+                                    "mo_ta",
+                                    "tinh_trang",
+                                    "hinh_anh"
+                                ],
+                                "properties": {
+                                    "ten_bai_viet": {
+                                        "type": "text"
+                                    },
+                                    "slug_bai_viet": {
+                                        "type": "text"
+                                    },
+                                    "mo_ta": {
+                                        "type": "text"
+                                    },
+                                    "tinh_trang": {
+                                        "type": "number"
+                                    },
+                                    "hinh_anh": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/admin/bai-viet/status": {
+            "post": {
+                "tags": [
+                    "Bài Viết"
+                ],
+                "summary": "Doi Trang Thai Bai Viet",
+                "description": "",
+                "operationId": "c63eca6d95fa5778441d737a2a5965f5",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/admin/bai-viet/delete": {
+            "post": {
+                "tags": [
+                    "Bài Viết"
+                ],
+                "summary": "Xoa Bai Viet",
+                "description": "",
+                "operationId": "3f94b579f4d1781233ce042e45f93dd6",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/admin/bai-viet/update": {
+            "post": {
+                "tags": [
+                    "Bài Viết"
+                ],
+                "summary": "Update Bai Viet",
+                "description": "",
+                "operationId": "2dcbe291a97bc0bdcfeee3db45271c73",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "ten_bai_viet",
+                                    "slug_bai_viet",
+                                    "mo_ta",
+                                    "tinh_trang",
+                                    "hinh_anh"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    },
+                                    "ten_bai_viet": {
+                                        "type": "text"
+                                    },
+                                    "slug_bai_viet": {
+                                        "type": "text"
+                                    },
+                                    "mo_ta": {
+                                        "type": "text"
+                                    },
+                                    "tinh_trang": {
+                                        "type": "number"
+                                    },
+                                    "hinh_anh": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/admin/chu-de/data": {
             "get": {
                 "tags": [
-                    "Chu De"
+                    "Chủ Đề"
                 ],
                 "summary": "Chu De Data",
                 "description": "Get Data Chu De",
@@ -140,7 +451,7 @@
         "/api/admin/chu-de/doi-trang-thai": {
             "post": {
                 "tags": [
-                    "Chu De"
+                    "Chủ Đề"
                 ],
                 "summary": "Doi Trang Thai Chu De",
                 "description": "",
@@ -202,7 +513,7 @@
         "/api/admin/chu-de/update": {
             "post": {
                 "tags": [
-                    "Chu De"
+                    "Chủ Đề"
                 ],
                 "summary": "Update Chu De",
                 "description": "",
@@ -276,7 +587,7 @@
         "/api/admin/chuong/data": {
             "get": {
                 "tags": [
-                    "Chuong"
+                    "Chương"
                 ],
                 "summary": "Chuong Data",
                 "description": "Get Data Chuong",
@@ -303,7 +614,7 @@
         "/api/admin/chuong/doi-trang-thai": {
             "post": {
                 "tags": [
-                    "Chuong"
+                    "Chương"
                 ],
                 "summary": "Doi Trang Thai Chuong",
                 "description": "",
@@ -365,7 +676,7 @@
         "/api/admin/chuong/update": {
             "post": {
                 "tags": [
-                    "Chuong"
+                    "Chương"
                 ],
                 "summary": "Update Chuong",
                 "description": "",
@@ -378,6 +689,7 @@
                                     "id",
                                     "ten_chuong",
                                     "so_thu_tu",
+                                    "id_de_muc",
                                     "is_open"
                                 ],
                                 "properties": {
@@ -388,6 +700,9 @@
                                         "type": "text"
                                     },
                                     "so_thu_tu": {
+                                        "type": "number"
+                                    },
+                                    "id_de_muc": {
                                         "type": "number"
                                     },
                                     "is_open": {
@@ -439,7 +754,7 @@
         "/api/admin/de-muc/data": {
             "get": {
                 "tags": [
-                    "De Muc"
+                    "Đề Mục"
                 ],
                 "summary": "De Muc Data",
                 "description": "Get Data De Muc",
@@ -466,7 +781,7 @@
         "/api/admin/de-muc/doi-trang-thai": {
             "post": {
                 "tags": [
-                    "De Muc"
+                    "Đề Mục"
                 ],
                 "summary": "Doi Trang Thai De Muc",
                 "description": "",
@@ -528,7 +843,7 @@
         "/api/admin/de-muc/update": {
             "post": {
                 "tags": [
-                    "De Muc"
+                    "Đề Mục"
                 ],
                 "summary": "Update De Muc",
                 "description": "",
@@ -541,6 +856,7 @@
                                     "id",
                                     "ten_de_muc",
                                     "so_thu_tu",
+                                    "id_chu_de",
                                     "is_open"
                                 ],
                                 "properties": {
@@ -551,6 +867,9 @@
                                         "type": "text"
                                     },
                                     "so_thu_tu": {
+                                        "type": "number"
+                                    },
+                                    "id_chu_de": {
                                         "type": "number"
                                     },
                                     "is_open": {

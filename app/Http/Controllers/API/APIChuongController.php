@@ -15,7 +15,7 @@ class APIChuongController extends Controller
      *      path="/api/admin/chuong/data",
      *      summary="Chuong Data",
      *      description="Get Data Chuong",
-     *      tags={"Chuong"},
+     *      tags={"Chương"},
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -38,8 +38,16 @@ class APIChuongController extends Controller
      * )
      */
 
-    public function getData()
+    public function getData(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
         $data = Chuong::join('de_mucs', 'de_mucs.id', 'chuongs.id_de_muc')
                       ->join('chu_des', 'chu_des.id', 'chuongs.id_de_muc')
                       ->select('chuongs.*', 'chu_des.ten_chu_de', 'de_mucs.ten_de_muc')
@@ -68,7 +76,7 @@ class APIChuongController extends Controller
      *      path="/api/admin/chuong/doi-trang-thai",
      *      summary="Doi Trang Thai Chuong",
      *      description="",
-     *      tags={"Chuong"},
+     *      tags={"Chương"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -101,6 +109,14 @@ class APIChuongController extends Controller
      */
     public function doiTrangThai(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
         $chuong = Chuong::find($request->id);
 
         if($chuong){
@@ -126,17 +142,18 @@ class APIChuongController extends Controller
      *      path="/api/admin/chuong/update",
      *      summary="Update Chuong",
      *      description="",
-     *      tags={"Chuong"},
+     *      tags={"Chương"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *                   type="object",
-     *                   required={"id","ten_chuong","so_thu_tu", "is_open"},
+     *                   required={"id","ten_chuong","so_thu_tu", "id_de_muc", "is_open"},
      *                   @OA\Property(property="id", type="number"),
      *                   @OA\Property(property="ten_chuong", type="text"),
      *                   @OA\Property(property="so_thu_tu", type="number"),
+     *                   @OA\Property(property="id_de_muc", type="number"),
      *                   @OA\Property(property="is_open", type="number"),
      *               ),
      *           ),
@@ -162,6 +179,14 @@ class APIChuongController extends Controller
      */
     public function updateChuong(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
         $data = $request->all();
 
         $chuong = Chuong::find($request->id);

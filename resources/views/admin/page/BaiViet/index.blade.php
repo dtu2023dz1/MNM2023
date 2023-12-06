@@ -275,6 +275,7 @@
                 },
                 offset: 4,
                 editor2 : null,
+                check : true,
             },
             mounted() {
                 CKEDITOR.replace('editor1');
