@@ -62,6 +62,14 @@ Route::group(['prefix'  =>  '/admin', "middleware" => "adminMiddleWare"], functi
         Route::post('/change-token', [AdminController::class, 'changeToken']);
     });
     Route::get('/logout', [AdminController::class, 'logout']);
+    Route::group(['prefix'  =>  '/bai-viet'], function() {
+        Route::get('/', [BaiVietController::class, 'index']);
+        Route::get('/data', [BaiVietController::class, 'getData']);
+        Route::post('/create', [BaiVietController::class, 'createBaiViet']);
+        Route::post('/status', [BaiVietController::class, 'statusBaiViet']);
+        Route::post('/update', [BaiVietController::class, 'updateBaiViet']);
+        Route::post('/delete', [BaiVietController::class, 'deleteBaiViet']);
+    });
 });
 
 Route::group([''], function() {
