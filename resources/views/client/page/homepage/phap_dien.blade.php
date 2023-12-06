@@ -3,17 +3,23 @@
     <div class="container" id="app">
         <div class="row mt-5 d-flex align-items-center">
             <div class="col">
-                <select class="form-select">
-                    <option value="">--Xem theo chủ đề--</option>
+                <select v-model="id_chu_de" v-on:change="createDeMucByID(id_chu_de)" class="form-control">
+                    <option value="" selected disabled>--Xem theo chủ đề--</option>
+                    <template v-for="(v, k) in list_chu_de_select">
+                        <option v-bind:value="v.id">@{{ v.ten_chu_de }}</option>
+                    </template>
                 </select>
             </div>
             <div class="col">
-                <select class="form-select">
-                    <option value="">--Xem theo đề mục--</option>
+                <select v-model="id_de_muc" class="form-control">
+                    <option value="" selected disabled>--Xem theo đề mục--</option>
+                    <template v-for="(v, k) in list_de_muc_select">
+                        <option v-bind:value="v.id">@{{ v.ten_de_muc }}</option>
+                    </template>
                 </select>
             </div>
             <div class="col">
-                <button class="btn btn-danger w-100">Tìm Kiếm</button>
+                <button class="genric-btn danger circle w-100" v-on:click="searchPhapDien()">Tìm Kiếm</button>
             </div>
         </div>
         <div class="row mt-5 mb-5">
@@ -41,7 +47,8 @@
                                                     <div class="" :id="'heading' + va.id + v.id">
                                                         <h5 class="mb-0">
                                                             <div class="w-100" data-toggle="collapse"
-                                                                :data-target="'#collapse' + va.id + v.id" aria-expanded="true"
+                                                                :data-target="'#collapse' + va.id + v.id"
+                                                                aria-expanded="true"
                                                                 :aria-controls="'collapse' + va.id + v.id">
                                                                 <a href="#" style="pointer-events: none;"><i
                                                                         class="fa-solid fa-book mr-2"></i>
@@ -107,6 +114,10 @@
                 list_chu_de: [],
                 list_de_muc: [],
                 list_chuong: [],
+                id_chu_de: {},
+                id_de_muc: {},
+                list_chu_de_select: [],
+                list_de_muc_select: [],
             },
             created() {
                 this.loadDataChuDe();
@@ -119,6 +130,7 @@
                         .get('/api/admin/chu-de/data')
                         .then((res) => {
                             this.list_chu_de = res.data.data;
+                            this.list_chu_de_select = res.data.data;
                             console.log(this.list_chu_de);
                         });
                 },
@@ -134,6 +146,26 @@
                         .get('/api/admin/chuong/data')
                         .then((res) => {
                             this.list_chuong = res.data.data;
+                        });
+                },
+                createDeMucByID(id) {
+                    axios
+                        .get(`/api/create-de-muc-data/` + id)
+                        .then((res) => {
+                            this.list_de_muc_select = res.data.data;
+                        });
+                },
+                searchPhapDien() {
+                    var payload = {
+                            'id_chu_de': this.id_chu_de,
+                            'id_de_muc': this.id_de_muc,
+                        };
+                    axios
+                        .post(`/api/search-phap-dien/`, payload)
+                        .then((res) => {
+                            this.list_chu_de = res.data.data_chu_de;
+                            this.list_de_muc = res.data.data_de_muc;
+                            this.list_chuong = res.data.data_chuong;
                         });
                 },
             }
