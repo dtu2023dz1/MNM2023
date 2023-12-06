@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChuDe;
 use App\Models\DeMuc;
+use App\Models\TieuMuc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Js;
 
@@ -44,6 +45,16 @@ class DeMucController extends Controller
         return response()->json([
             'data'    => $response,
             'chuDe'   => $chuDe
+        ]);
+    }
+
+    public function getDataHomePage()
+    {
+        $data = DeMuc::where('is_open', 1)
+                     ->get();
+
+        return response()->json([
+            'data'    => $data,
         ]);
     }
 
@@ -91,6 +102,15 @@ class DeMucController extends Controller
     public function createDataDeMuc($id)
     {
         $data = DeMuc::where('id_chu_de', $id)->get();
+
+        return response()->json([
+            'data'    => $data,
+        ]);
+    }
+
+    public function createDataTieuMuc($id)
+    {
+        $data = TieuMuc::where('id_chuong', $id)->get();
         // dd($data->toArray());
         return response()->json([
             'data'    => $data,

@@ -13,8 +13,8 @@
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p class="info2">03 Quang Trung, Hải Châu, Đà Nẵng</p>
-                                        <p class="info2">Phone: +84 905.523.543</p>
+                                        <p class="info2">Địa chỉ: 254 Nguyễn Văn Linh, Quận Thanh Khê - Tp. Đà Nẵng</p>
+                                        <p class="info2">Điện thoại: (+84) 905.523543</p>
                                     </div>
                                 </div>
                             </div>
@@ -59,9 +59,7 @@
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                         <div class="single-footer-caption mb-50">
-                            {{-- <div class="banner">
-                                <img src="/assets_client/img/gallery/body_card4.png" alt="">
-                            </div> --}}
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.1068002628317!2d108.20716727592925!3d16.059946739684715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b4239d8e51%3A0x96e408c6b0419760!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBEdXkgVMOibg!5e0!3m2!1svi!2s!4v1701836650413!5m2!1svi!2s" width="auto" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>

@@ -34,6 +34,7 @@ Route::get('/get-data-de-muc-api', [DeMucController::class, 'getDataAPI']);
 Route::post('/create-tieu-muc', [TieuMucController::class, 'store']);
 Route::get('/data-excel', [AutoController::class, 'dataExcel']);
 Route::get('/create-de-muc-data/{id}', [DeMucController::class, 'createDataDeMuc']);
+Route::get('/create-tieu-muc-data/{id}', [DeMucController::class, 'createDataTieuMuc']);
 Route::post('/search-phap-dien', [ChuDeController::class, 'searchPhapDien']);
 
 

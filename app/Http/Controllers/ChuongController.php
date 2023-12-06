@@ -41,6 +41,16 @@ class ChuongController extends Controller
         ]);
     }
 
+    public function getDataHomePage()
+    {
+        $data = Chuong::where('is_open', 1)
+                      ->get();
+
+        return response()->json([
+            'data'    => $data,
+        ]);
+    }
+
     public function doiTrangThai(Request $request)
     {
         $chuong = Chuong::find($request->id);

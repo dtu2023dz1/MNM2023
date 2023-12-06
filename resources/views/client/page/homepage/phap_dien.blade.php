@@ -1,7 +1,7 @@
 @extends('client.share.master')
 @section('content')
     <div class="container" id="app">
-        <div class="row mt-5 d-flex align-items-center">
+        <div class="row mt-5 d-flex align-items-center text-nowrap">
             <div class="col">
                 <select v-model="id_chu_de" v-on:change="createDeMucByID(id_chu_de)" class="form-control">
                     <option value="" selected disabled>--Xem theo chủ đề--</option>
@@ -63,33 +63,41 @@
                                                         <div class="card-body">
                                                             <template v-for="(value, key) in list_chuong"
                                                                 v-if="value.id_chu_de == v.id, value.id_de_muc == va.id">
-                                                                <p><a href="" class="text-dark" data-toggle="modal"
-                                                                        data-target="#exampleModal"><i
+                                                                <p><a v-on:click="getDataTieuMuc(value.id)" href=""
+                                                                        class="text-dark" data-toggle="modal"
+                                                                        :data-target="'#exampleModal' + va.id + v.id + value.id"><i
                                                                             class="fa-regular fa-bookmark mr-2"></i>
                                                                         @{{ value.ten_chuong }}</a></p>
-                                                            </template>
-                                                            <div class="modal fade" id="exampleModal" tabindex="-1"
-                                                                role="dialog" aria-labelledby="exampleModalLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog modal-xl"
-                                                                    style="max-width: 100% !important; margin-left: 15px"
-                                                                    role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">
-                                                                                Modal
-                                                                                title</h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            ...
+                                                                <div class="modal fade" :id="'exampleModal' + va.id + v.id + value.id" tabindex="-1"
+                                                                    role="dialog" aria-labelledby="exampleModalLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog modal-xl"
+                                                                        style="max-width: 100% !important; margin-left: 15px"
+                                                                        role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel">
+                                                                                    @{{ value.ten_chuong }}</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <template v-for="(val, k) in list_tieu_muc">
+                                                                                    <p><b>@{{ val.ten_tieu_muc }}</b></p>
+                                                                                    <p><i><a
+                                                                                                v-bind:href="v.link_ghi_chu">@{{ val.ghi_chu }}</a></i>
+                                                                                    </p>
+                                                                                    <p>@{{ val.noi_dung }}</p>
+                                                                                    <p><i>@{{ val.chi_dan }}</i></p>
+                                                                                </template>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </template>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,6 +122,7 @@
                 list_chu_de: [],
                 list_de_muc: [],
                 list_chuong: [],
+                list_tieu_muc: [],
                 id_chu_de: {},
                 id_de_muc: {},
                 list_chu_de_select: [],
@@ -127,23 +136,22 @@
             methods: {
                 loadDataChuDe() {
                     axios
-                        .get('/api/admin/chu-de/data')
+                        .get('/chu-de/data-homepage')
                         .then((res) => {
                             this.list_chu_de = res.data.data;
                             this.list_chu_de_select = res.data.data;
-                            console.log(this.list_chu_de);
                         });
                 },
                 loadDataDeMuc() {
                     axios
-                        .get('/api/admin/de-muc/data')
+                        .get('/de-muc/data-homepage')
                         .then((res) => {
                             this.list_de_muc = res.data.data;
                         });
                 },
                 loadDataChuong() {
                     axios
-                        .get('/api/admin/chuong/data')
+                        .get('/chuong/data-homepage')
                         .then((res) => {
                             this.list_chuong = res.data.data;
                         });
@@ -155,11 +163,18 @@
                             this.list_de_muc_select = res.data.data;
                         });
                 },
+                getDataTieuMuc(id) {
+                    axios
+                        .get(`/api/create-tieu-muc-data/` + id)
+                        .then((res) => {
+                            this.list_tieu_muc = res.data.data;
+                        });
+                },
                 searchPhapDien() {
                     var payload = {
-                            'id_chu_de': this.id_chu_de,
-                            'id_de_muc': this.id_de_muc,
-                        };
+                        'id_chu_de': this.id_chu_de,
+                        'id_de_muc': this.id_de_muc,
+                    };
                     axios
                         .post(`/api/search-phap-dien/`, payload)
                         .then((res) => {
