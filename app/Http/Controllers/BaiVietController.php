@@ -7,6 +7,7 @@ use App\Http\Requests\BaiViet\DeleteBaiVietRequest;
 use App\Http\Requests\BaiViet\UpdateBaiVietRequest;
 use App\Models\BaiViet;
 use Illuminate\Http\Request;
+use Mockery\Undefined;
 
 class BaiVietController extends Controller
 {
@@ -39,12 +40,14 @@ class BaiVietController extends Controller
     public function createBaiViet(CreateBaiVietRequest $request)
     {
         $data = $request->all();
-
-        if (isset($data['hinh_anh']) && $data['hinh_anh'] != null) {
+        if ($data['hinh_anh'] != null) {
             $file = $request->file('hinh_anh');
             $hinh_anh = $this->getLinkUpdateAVT('image-bai-viet', $file);
             $data['hinh_anh'] = $hinh_anh;
+        } else {
+            $data['hinh_anh'] = null;
         }
+        $data['id_danh_muc'] = null;
 
         BaiViet::create($data);
 
@@ -94,6 +97,7 @@ class BaiVietController extends Controller
         $bai_viet = BaiViet::find($request->id);
         if ($bai_viet) {
             $data = $request->all();
+            $data['id_danh_muc'] = null;
             if (isset($data['hinh_anh']) && $data['hinh_anh'] != null) {
                 $file = $request->file('hinh_anh');
                 $hinh_anh = $this->getLinkUpdateAVT('image-bao-viet-update', $file);

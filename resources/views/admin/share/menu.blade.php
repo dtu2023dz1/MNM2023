@@ -50,6 +50,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/admin/bai-viet" class="nav-link">
+                        <i class="fa-solid fa-link mr-2"></i>
+                        <p>
+                            Bài Viết
+                        </p>
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie mr-2"></i>

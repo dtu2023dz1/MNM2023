@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('ten_bai_viet');
             $table->string('slug_bai_viet');
-            $table->string('mo_ta');
+            $table->longText('mo_ta');
             $table->integer('tinh_trang');
             $table->string('hinh_anh')->nullable();
             $table->integer('id_danh_muc')->nullable();

@@ -35,18 +35,19 @@
                                                     <input v-model="slug_bai_viet" type="text" class="form-control" placeholder="Nhập vào slug bài viết...">
                                                 </div>
                                             </div>
-                                            <div class="row mt-2">
+                                            {{-- <div class="row mt-2">
                                                 <div class="col-12">
                                                     <label class="form-select">Danh Mục</label>
                                                     <select v-model="add.id_danh_muc" class="form-control" name="" id="">
                                                         <option value="">Chọn Danh Mục</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="row mt-2">
                                                 <div class="col-12">
                                                     <label class="form-select">Mô Tả</label>
-                                                    <textarea v-model="add.mo_ta" class="form-control" name="" id="" cols="30" rows="5" placeholder="Nhập vào nội dung..."></textarea>
+                                                    {{-- <textarea v-model="add.mo_ta" class="form-control" name="" id="" cols="30" rows="5" placeholder="Nhập vào nội dung..."></textarea> --}}
+                                                    <textarea name="editor1" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row mt-2">
@@ -88,21 +89,23 @@
                                     <th class="text-center align-middle text-nowrap">Tên Bài Viết</th>
                                     <th class="text-center align-middle text-nowrap">Hình Ảnh</th>
                                     <th class="text-center align-middle text-nowrap">Mô Tả</th>
-                                    <th class="text-center align-middle text-nowrap">Danh Mục</th>
                                     <th class="text-center align-middle text-nowrap">Tình Trạng</th>
                                     <th class="text-center align-middle text-nowrap">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <template v-for="(value, key) in list">
-                                <tr>
+                                    <tr>
                                         <th class="text-center align-middle text-nowrap">@{{ key + 1 }}</th>
-                                        <td class="align-middle text-nowrap">@{{ value.ten_bai_viet }}</td>
+                                        <td class="align-middle text-wrap">@{{ value.ten_bai_viet }}</td>
                                         <td class="text-center align-middle text-nowrap">
-                                            <img v-bind:src="value.hinh_anh" class="img-fluid" style="width: 200px; height: 200px;" alt="">
+                                            <template v-if="value.hinh_anh != null">
+                                                <img v-bind:src="value.hinh_anh" class="img-fluid" style="width: 200px; height: 200px;" alt="">
+                                            </template>
                                         </td>
-                                        <td class="align-middle text-wrap">@{{ value.mo_ta }}</td>
-                                        <td class="text-center align-middle text-nowrap">@{{ value.id_danh_muc }}</td>
+                                        <td class="align-middle text-wrap text-center">
+                                            <i class="fa-solid fa-i text-primary" data-toggle="modal" data-target="#moTaModal" v-on:click="moTa(value.mo_ta)"></i>
+                                        </td>
                                         <td class="text-center align-middle text-nowrap">
                                             <template v-if="value.tinh_trang == 1">
                                                 <button v-on:click="statusBaiViet(value)" style="width: 150px;" class="btn btn-primary">
@@ -116,7 +119,7 @@
                                             </template>
                                         </td>
                                         <td class="text-center align-middle text-nowrap">
-                                            <button class="btn btn-outline-primary me-2" v-on:click="edit = Object.assign({}, value)" data-toggle="modal" data-target="#capNhatBaiVietModal">
+                                            <button class="btn btn-outline-primary me-2" v-on:click="setCkeditor(value)" data-toggle="modal" data-target="#capNhatBaiVietModal">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </button>
                                             <button class="btn btn-outline-danger" v-on:click="xoa = Object.assign({}, value)" data-toggle="modal" data-target="#xoaBaiVietModal">
@@ -167,18 +170,19 @@
                                                 <input v-model="edit.slug_bai_viet" type="text" class="form-control" placeholder="Nhập vào slug bài viết...">
                                             </div>
                                         </div>
-                                        <div class="row mt-2">
+                                        {{-- <div class="row mt-2">
                                             <div class="col-12">
                                                 <label class="form-select">Danh Mục</label>
                                                 <select v-model="edit.id_danh_muc" class="form-control" name="" id="">
                                                     <option value="">Chọn Danh Mục</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="row mt-2">
                                             <div class="col-12">
                                                 <label class="form-select">Mô Tả</label>
-                                                <textarea v-model="edit.mo_ta" class="form-control" name="" id="" cols="30" rows="5" placeholder="Nhập vào nội dung..."></textarea>
+                                                {{-- <textarea v-model="edit.mo_ta" class="form-control" name="" id="" cols="30" rows="5" placeholder="Nhập vào nội dung..."></textarea> --}}
+                                                <textarea name="editor2" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="row mt-2">
@@ -227,6 +231,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="moTaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Mô Tả</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-wrap">
+                                        <textarea id="myTextarea" v-model="mota.mo_ta" cols="30" rows="10" class="form-control"></textarea>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -234,6 +253,7 @@
     </div>
 @endsection
 @section('js')
+    <script src="https://cdn.ckeditor.com/4.17.0/standard/ckeditor.js"></script>
     <script>
         new Vue({
             el      :   '#app',
@@ -245,6 +265,7 @@
                 xoa             : {},
                 edit            : {},
                 file_update     : "",
+                mota            : {},
                 pagination: {
                     total: 0,
                     per_page: 2,
@@ -253,6 +274,10 @@
                     current_page: 1
                 },
                 offset: 4,
+                editor2 : null,
+            },
+            mounted() {
+                CKEDITOR.replace('editor1');
             },
             created()   {
                 this.getVueItems(this.pagination.current_page);
@@ -282,6 +307,23 @@
                 },
             },
             methods :   {
+                moTa(mota) {
+                    const targetElementId = 'myTextarea'; // Replace with your desired ID
+                    const targetElement = document.getElementById(targetElementId);
+
+                    if (targetElement) {
+                        const div = document.createElement('div');
+                        div.innerHTML = mota;
+
+                        // Set the plain text content to the element with the specified ID
+                        targetElement.textContent = div.textContent || div.innerText;
+                    }
+                },
+                setCkeditor(value) {
+                    this.edit = value;
+                    var editorInstance = CKEDITOR.replace('editor2');
+                    editorInstance.setData(value.mo_ta);
+                },
                 getVueItems: function(page){
                     axios
                         .get('/admin/bai-viet/data?page='+page) // đổi link ở đây
@@ -321,7 +363,6 @@
 
                 getFile(e) {
                     this.file = e.target.files[0];
-                    console.log(this.file);
                 },
 
                 getFileUpdate(e) {
@@ -329,6 +370,7 @@
                 },
 
                 themMoi() {
+                    this.add.mo_ta = CKEDITOR.instances.editor1.getData();
                     const payload = new FormData();
                     payload.append('hinh_anh', this.file);
                     payload.append('ten_bai_viet', this.add.ten_bai_viet);
@@ -350,7 +392,10 @@
                                 toastr.success(res.data.message);
                                 $("#themMoiModal").modal('hide');
                                 this.getVueItems(this.pagination.current_page);
+                                this.add = {};
+                                this.slug_bai_viet = "";
                                 this.file = "";
+                                CKEDITOR.replace('editor1').setData("");
                             } else {
                                 toastr.error(res.data.message);
                             }
