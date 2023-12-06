@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Admincontroller;
 use App\Http\Controllers\API\APIAdmincontroller;
+use App\Http\Controllers\API\APIBaiVietController;
 use App\Http\Controllers\API\APIChuDeController;
 use App\Http\Controllers\API\APIChuongController;
 use App\Http\Controllers\API\APIDeMucController;
@@ -59,5 +60,13 @@ Route::group(['prefix'  =>  '/admin'], function() {
     Route::group(['prefix'  =>  '/account'], function() {
         Route::get('/data', [APIAdmincontroller::class, 'getData']);
         Route::post('/create', [APIAdmincontroller::class, 'store']);
+    });
+
+    Route::group(['prefix'  =>  '/bai-viet'], function() {
+        Route::get('/data', [APIBaiVietController::class, 'getData']);
+        Route::post('/create', [APIBaiVietController::class, 'createBaiViet']);
+        Route::post('/status', [APIBaiVietController::class, 'statusBaiViet']);
+        Route::post('/update', [APIBaiVietController::class, 'updateBaiViet']);
+        Route::post('/delete', [APIBaiVietController::class, 'deleteBaiViet']);
     });
 });

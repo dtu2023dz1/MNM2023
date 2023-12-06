@@ -15,7 +15,7 @@ class APIDeMucController extends Controller
      *      path="/api/admin/de-muc/data",
      *      summary="De Muc Data",
      *      description="Get Data De Muc",
-     *      tags={"De Muc"},
+     *      tags={"Đề Mục"},
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -38,8 +38,17 @@ class APIDeMucController extends Controller
      * )
      */
 
-    public function getData()
+    public function getData(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
+
         $data = DeMuc::join('chu_des', 'chu_des.id', 'de_mucs.id_chu_de')
             ->select('de_mucs.*', 'chu_des.ten_chu_de')
             //  ->paginate(env('PAGINATE_ADMIN'));
@@ -68,7 +77,7 @@ class APIDeMucController extends Controller
      *      path="/api/admin/de-muc/doi-trang-thai",
      *      summary="Doi Trang Thai De Muc",
      *      description="",
-     *      tags={"De Muc"},
+     *      tags={"Đề Mục"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -101,6 +110,14 @@ class APIDeMucController extends Controller
      */
     public function doiTrangThai(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
         $deMuc = DeMuc::find($request->id);
 
         if ($deMuc) {
@@ -126,17 +143,18 @@ class APIDeMucController extends Controller
      *      path="/api/admin/de-muc/update",
      *      summary="Update De Muc",
      *      description="",
-     *      tags={"De Muc"},
+     *      tags={"Đề Mục"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *                   type="object",
-     *                   required={"id","ten_de_muc","so_thu_tu", "is_open"},
+     *                   required={"id","ten_de_muc","so_thu_tu","id_chu_de", "is_open"},
      *                   @OA\Property(property="id", type="number"),
      *                   @OA\Property(property="ten_de_muc", type="text"),
      *                   @OA\Property(property="so_thu_tu", type="number"),
+     *                   @OA\Property(property="id_chu_de", type="number"),
      *                   @OA\Property(property="is_open", type="number"),
      *               ),
      *           ),
@@ -162,6 +180,14 @@ class APIDeMucController extends Controller
      */
     public function updateDeMuc(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
         $data = $request->all();
 
         $deMuc = DeMuc::find($request->id);

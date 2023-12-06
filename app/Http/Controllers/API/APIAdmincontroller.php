@@ -37,8 +37,17 @@ class APIAdmincontroller extends Controller
      *      )
      * )
      */
-    public function getData()
+    public function getData(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
+
         $data = Admin::get();
 
         return response()->json([
@@ -91,6 +100,15 @@ class APIAdmincontroller extends Controller
      */
     public function store(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
+
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
         Admin::create($data);

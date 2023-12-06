@@ -15,7 +15,7 @@ class APIChuDeController extends Controller
      *      path="/api/admin/chu-de/data",
      *      summary="Chu De Data",
      *      description="Get Data Chu De",
-     *      tags={"Chu De"},
+     *      tags={"Chủ Đề"},
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -73,7 +73,7 @@ class APIChuDeController extends Controller
      *      path="/api/admin/chu-de/doi-trang-thai",
      *      summary="Doi Trang Thai Chu De",
      *      description="",
-     *      tags={"Chu De"},
+     *      tags={"Chủ Đề"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -106,6 +106,14 @@ class APIChuDeController extends Controller
      */
     public function doiTrangThai(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
         $chuDe = ChuDe::find($request->id);
 
         if($chuDe){
@@ -131,7 +139,7 @@ class APIChuDeController extends Controller
      *      path="/api/admin/chu-de/update",
      *      summary="Update Chu De",
      *      description="",
-     *      tags={"Chu De"},
+     *      tags={"Chủ Đề"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -167,6 +175,14 @@ class APIChuDeController extends Controller
      */
     public function updateChuDe(Request $request)
     {
+        $token = $request->header("token");
+        $check = $this->checkToken($token);
+        if($check == false) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Token not match!'
+            ]);
+        }
         $data = $request->all();
 
         $chuDe = ChuDe::find($request->id);
