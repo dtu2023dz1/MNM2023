@@ -9,14 +9,15 @@ use Illuminate\Http\Request;
 
 class ChuDeController extends Controller
 {
-    public function viewChuDe(){
+    public function viewChuDe()
+    {
         return view('admin.page.ChuDe.index');
     }
 
     public function getData()
     {
         $data = ChuDe::paginate(env('PAGINATE_ADMIN'));
-
+        $dataHomePage = ChuDe::where('is_open', 1)->get();
         $response = [
             'pagination' => [
                 'total' => $data->total(),
@@ -26,11 +27,22 @@ class ChuDeController extends Controller
                 'from' => $data->firstItem(),
                 'to' => $data->lastItem()
             ],
-            'data' => $data,
+            'data'          => $data,
         ];
 
         return response()->json([
-            'data'    => $response,
+            'data'          => $response,
+            'dataHomePage'  => $dataHomePage
+        ]);
+    }
+
+    public function getDataHomePage()
+    {
+        $data = ChuDe::where('is_open', 1)->get();
+
+
+        return response()->json([
+            'data'          => $data,
         ]);
     }
 
@@ -38,7 +50,7 @@ class ChuDeController extends Controller
     {
         $chuDe = ChuDe::find($request->id);
 
-        if($chuDe){
+        if ($chuDe) {
             $chuDe->is_open = !$chuDe->is_open;
             $chuDe->save();
 
@@ -60,7 +72,7 @@ class ChuDeController extends Controller
 
         $chuDe = ChuDe::find($request->id);
 
-        if($chuDe){
+        if ($chuDe) {
             $chuDe->update($data);
 
             return response()->json([
@@ -78,12 +90,31 @@ class ChuDeController extends Controller
     public function searchPhapDien(Request $request)
     {
         // dd($request->all());
-        $data_chu_de = ChuDe::where('id', $request->id_chu_de)->get();
-        $data_de_muc = DeMuc::where('id', $request->id_de_muc)
-                            ->get();
-        $data_chuong = Chuong::where('id_chu_de', $request->id_chu_de)
-                             ->where('id_de_muc', $request->id_de_muc)
-                             ->get();
+        $data_chu_de = [];
+        $data_de_muc = [];
+        $data_chuong = [];
+
+        $id_chu_de = $request->id_chu_de;
+        $id_de_muc = $request->id_de_muc;
+
+        if (empty($id_chu_de) && empty($id_de_muc)) {
+            $data_chu_de = ChuDe::where('is_open', 1)->get();
+            $data_de_muc = DeMuc::where('is_open', 1)->get();
+            $data_chuong = Chuong::where('is_open', 1)->get();
+        } else {
+            $data_chu_de = ChuDe::where('id', $id_chu_de)->where('is_open', 1)->get();
+            if (empty($id_de_muc)) {
+                $data_de_muc = DeMuc::where('is_open', 1)->get();
+                $data_chuong = Chuong::where('is_open', 1)->where('id_chu_de', $id_chu_de)->get();
+            } else {
+                $data_de_muc = DeMuc::where('id', $id_de_muc)->where('is_open', 1)->get();
+                $data_chuong = Chuong::where('id_chu_de', $id_chu_de)
+                    ->where('id_de_muc', $id_de_muc)
+                    ->where('is_open', 1)
+                    ->get();
+            }
+        }
+
         return response()->json([
             'data_chu_de'   => $data_chu_de,
             'data_de_muc'   => $data_de_muc,
