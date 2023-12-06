@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
+        {{-- <div class="row justify-content-center">
             <div class="col-md- col-xl-6">
                 <div class="card__content swiper">
                     <div class="swiper-wrapper">
@@ -167,7 +167,7 @@
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 </body>
@@ -192,7 +192,8 @@
             header: {
                 "Content-Type": "application/json",
                 "token": "SxYgrllPv9Avk4Y-xbptJkGU4Bu1knlEvyyOnI5AqytpkBJFICFsDLodP-kTZCdd"
-            }
+            },
+            API_BOT : 'http://127.0.0.1:2003'
         },
         created() {
 
@@ -211,7 +212,7 @@
                 }
 
                 recognition.onerror = (err) => {
-                    console.error(err);
+                    console.log(err);
                 }
 
                 recognition.onresult = (e) => {
@@ -249,11 +250,29 @@
                         audio.play();
                     })
                     .catch((error) => {
-                        console.error('Error fetching TTS data:', error);
+                        console.log('Error fetching TTS data:', error);
                     });
             },
 
-            sendRequest(text) {
+            async sendRequest(text) {
+                // var payload = {
+                //     'msg' : text
+                // }
+                // await axios
+                //     .post(this.API_BOT + '/message', payload)
+                //     .then((res) => {
+                //         var message = res.data.message_list;
+                //         var res = {
+                //                 id: 1,
+                //                 message: text_return
+                //         };
+                //         this.list.push(res);
+                //         this.speak(text_return);
+                //     })
+                //     .catch((error) => {
+                //         console.log(error);
+                //     });
+
                 var text_return = " Trong chủ đề số 1: An ninh quốc gia, Ở đề mục số 7: Cơ yếu,Chương I NHỮNG QUY ĐỊNH CHUNG có nội dung: Điều 1.7.TL.2.2. Đối tượng áp dụng: Người làm công tác cơ yếu không phải là quân nhân, Công an nhân dân hưởng lương theo bảng lương cấp hàm cơ yếu và bảng lương chuyên môn kỹ thuật cơ yếu (sau đây gọi tắt là người làm công tác cơ yếu).. Ghi chú (Điều 2 Thông tư liên tịch số 11/2014/TTLT-BQP-BNV -BLĐTBXH-BTC, có hiệu lực thi hành kể từ ngày 19/04/2014) (link: http://vbpl.vn/TW/Pages/vbpq-toanvan.aspx?ItemID=102347#Chuong_I_Dieu_2)";
                 var res = {
                         id: 1,
