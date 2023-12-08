@@ -167,6 +167,8 @@ Giấy phép từ [AdminLTE](https://adminlte.io/docs/3.0/license.html) giao di�
 ![image](https://github.com/dtu2023dz1/MNM2023/assets/151995348/32d708bd-5414-4413-aae8-36b53125d689)
 
 ![san_pham2](https://github.com/dtu2023dz1/MNM2023/assets/151995348/2c0a30f9-79bb-49e5-b054-273137a78166)
+    * RESTs API
+![image](https://github.com/dtu2023dz1/MNM2023/assets/151995348/a319268b-e84b-4c2c-8d4a-57ce6013e7f1)
 
 ## Giao Diện Admin
     *API Token
